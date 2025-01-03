@@ -3,8 +3,8 @@ import { Metadata } from "next";
 import SarkaraMenu from "../../pages/Menu";
 
 export const metadata: Metadata = {
-  title: "Login POS Apotek Farmaguru",
-  description: "Login POS Apotek Farmaguru",
+  title: "Sarkara Coffee - Menu",
+  description: "Menu Sarkara Coffee",
 };
 
 const page = () => {
