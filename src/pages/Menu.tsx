@@ -822,7 +822,7 @@ export default function SarkaraMenu() {
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                   {selectedProducts.map((product) => (
                     <div key={product.id} className="group relative">
-                      <Image
+                      <img
                         alt={product.name}
                         src={product.imageSrc}
                         className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
