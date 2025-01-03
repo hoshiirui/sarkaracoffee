@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -22,120 +22,434 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Header from "@/components/Header";
+import { formatToIDR } from "@/helper/idrFormatter";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Rekomendasi", href: "#", current: true },
+  { name: "A - Z", href: "#", current: false },
+  { name: "Z - A", href: "#", current: false },
+  { name: "Termurah", href: "#", current: false },
+  { name: "Termahal", href: "#", current: false },
 ];
-const subCategories = [
-  { name: "Totes", href: "#" },
-  { name: "Backpacks", href: "#" },
-  { name: "Travel Bags", href: "#" },
-  { name: "Hip Bags", href: "#" },
-  { name: "Laptop Sleeves", href: "#" },
-];
+// const subCategories = [
+//   { name: "Sarkara Signature", href: "#" },
+//   { name: "", href: "#" },
+//   { name: "Travel Bags", href: "#" },
+//   { name: "Hip Bags", href: "#" },
+//   { name: "Laptop Sleeves", href: "#" },
+// ];
+
 const filters = [
   {
-    id: "color",
-    name: "Color",
+    id: "kategori",
+    name: "Kategori",
     options: [
-      { value: "white", label: "White", checked: false },
-      { value: "beige", label: "Beige", checked: false },
-      { value: "blue", label: "Blue", checked: true },
-      { value: "brown", label: "Brown", checked: false },
-      { value: "green", label: "Green", checked: false },
-      { value: "purple", label: "Purple", checked: false },
+      { value: "signature", label: "Sarkara Signature", checked: false },
+      { value: "espresso", label: "Base Espresso", checked: false },
+      { value: "coffee", label: "Coffee", checked: true },
+      { value: "non-coffee", label: "Non Coffee", checked: false },
+      { value: "others", label: "Tea & Squash & Others", checked: false },
+      { value: "food", label: "Food & Snacks", checked: false },
     ],
   },
   {
-    id: "category",
-    name: "Category",
+    id: "varian",
+    name: "Varian",
     options: [
-      { value: "new-arrivals", label: "New Arrivals", checked: false },
-      { value: "sale", label: "Sale", checked: false },
-      { value: "travel", label: "Travel", checked: true },
-      { value: "organization", label: "Organization", checked: false },
-      { value: "accessories", label: "Accessories", checked: false },
+      { value: "new", label: "Menu Baru", checked: false },
+      { value: "hot", label: "Hot / Panas", checked: false },
+      { value: "ice", label: "Ice / Dingin", checked: true },
     ],
   },
-  {
-    id: "size",
-    name: "Size",
-    options: [
-      { value: "2l", label: "2L", checked: false },
-      { value: "6l", label: "6L", checked: false },
-      { value: "12l", label: "12L", checked: false },
-      { value: "18l", label: "18L", checked: false },
-      { value: "20l", label: "20L", checked: false },
-      { value: "40l", label: "40L", checked: true },
-    ],
-  },
+  // {
+  //   id: "size",
+  //   name: "Size",
+  //   options: [
+  //     { value: "2l", label: "2L", checked: false },
+  //     { value: "6l", label: "6L", checked: false },
+  //     { value: "12l", label: "12L", checked: false },
+  //     { value: "18l", label: "18L", checked: false },
+  //     { value: "20l", label: "20L", checked: false },
+  //     { value: "40l", label: "40L", checked: true },
+  //   ],
+  // },
 ];
-const products = [
+
+const sarkaraProducts = [
   {
     id: 1,
-    name: "Basic Tee",
-    href: "#",
+    name: "Sarkara Original Coffee",
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: 16000,
+    recPrior: 10,
+    categories: ["signature", "ice"],
   },
   {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
+    id: 2,
+    name: "Sarkara Speciality Mocktail",
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: 18000,
+    recPrior: 10,
+    categories: ["signature", "ice"],
   },
   {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
+    id: 3,
+    name: "Espresso Single",
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: 10000,
+    recPrior: 10,
+    categories: ["espresso", "hot"],
   },
   {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
+    id: 4,
+    name: "Espresso Double",
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: 12000,
+    recPrior: 6,
+    categories: ["espresso", "hot"],
   },
   {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
+    id: 5,
+    name: "Americano",
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: 15000,
+    recPrior: 6,
+    categories: ["espresso", "hot", "ice"],
   },
   {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
+    id: 6,
+    name: "Kopi Susu",
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
+    price: 15000,
+    recPrior: 6,
+    categories: ["coffee", "hot", "ice"],
   },
-  // More products...
+  {
+    id: 7,
+    name: "Latte",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["coffee", "hot", "ice"],
+  },
+  {
+    id: 8,
+    name: "Latte + Syrup",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 20000,
+    recPrior: 7,
+    categories: ["coffee", "hot", "ice"],
+  },
+  {
+    id: 9,
+    name: "Cappucino",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 17000,
+    recPrior: 6,
+    categories: ["coffee", "hot", "ice"],
+  },
+  {
+    id: 10,
+    name: "Mochacino",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 17000,
+    recPrior: 6,
+    categories: ["coffee", "hot", "ice"],
+  },
+  {
+    id: 11,
+    name: "Matcha Coffee Milk",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 20000,
+    recPrior: 6,
+    categories: ["coffee", "ice"],
+  },
+  {
+    id: 12,
+    name: "Redvelvet Coffee Milk",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 20000,
+    recPrior: 6,
+    categories: ["coffee", "ice"],
+  },
+  {
+    id: 13,
+    name: "Oreo Coffee Milk",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 20000,
+    recPrior: 6,
+    categories: ["coffee", "ice"],
+  },
+  {
+    id: 14,
+    name: "Matcha Latte",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "hot", "ice"],
+  },
+  {
+    id: 15,
+    name: "Redvelvet Latte",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "hot", "ice"],
+  },
+  {
+    id: 16,
+    name: "Taro Latte",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "hot", "ice"],
+  },
+  {
+    id: 17,
+    name: "Chocolatte",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "hot", "ice"],
+  },
+  {
+    id: 18,
+    name: "Vanilla Milk Original",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["non-coffee", "hot", "ice"],
+  },
+  {
+    id: 19,
+    name: "Vanilla Caramel",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "ice"],
+  },
+  {
+    id: 20,
+    name: "Vanilla Hazelnut",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "ice"],
+  },
+  {
+    id: 21,
+    name: "Vanilla Oreo",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 16000,
+    recPrior: 6,
+    categories: ["non-coffee", "ice"],
+  },
+  {
+    id: 22,
+    name: "Choco Hazelnut",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 18000,
+    recPrior: 6,
+    categories: ["non-coffee", "ice"],
+  },
+  {
+    id: 23,
+    name: "Choco Oreo",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 18000,
+    recPrior: 6,
+    categories: ["non-coffee", "ice"],
+  },
+  {
+    id: 24,
+    name: "Tea",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 6000,
+    recPrior: 6,
+    categories: ["others", "hot", "ice"],
+  },
+  {
+    id: 25,
+    name: "Leci Tea",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 10000,
+    recPrior: 6,
+    categories: ["others", "hot", "ice"],
+  },
+  {
+    id: 26,
+    name: "Lemon Tea",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 10000,
+    recPrior: 6,
+    categories: ["others", "hot", "ice"],
+  },
+  {
+    id: 27,
+    name: "Strawberry Tea",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 10000,
+    recPrior: 6,
+    categories: ["others", "hot", "ice"],
+  },
+  {
+    id: 28,
+    name: "Virgin Squash",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["others", "ice"],
+  },
+  {
+    id: 29,
+    name: "Strawberry Squash",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["others", "ice"],
+  },
+  {
+    id: 30,
+    name: "Lemon Squash",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["others", "ice"],
+  },
+  {
+    id: 31,
+    name: "Leci Squash",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["others", "ice"],
+  },
+  {
+    id: 32,
+    name: "Mineral Water",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 5000,
+    recPrior: 6,
+    categories: ["others", "hot", "ice"],
+  },
+  {
+    id: 33,
+    name: "Nasi Goreng",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 15000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 34,
+    name: "Mie Instan Goreng Lengkap",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 12000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 35,
+    name: "Mie Instan Kuah Lengkap",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 12000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 36,
+    name: "Nasi Putih",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 5000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 37,
+    name: "Telur",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 5000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 38,
+    name: "Kentang Goreng",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 10000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 39,
+    name: "Roti Panggang",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 10000,
+    recPrior: 6,
+    categories: ["food"],
+  },
+  {
+    id: 40,
+    name: "Pisang Goreng",
+    imageSrc:
+      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    price: 10000,
+    recPrior: 6,
+    categories: ["food"],
+    variants: [
+      {
+        name: "coklat",
+        add: 0,
+      },
+      {
+        name: "keju",
+        add: 0,
+      },
+      {
+        name: "mix",
+        add: 2000,
+      },
+    ],
+  },
 ];
 
 function classNames(...classes: any) {
@@ -144,6 +458,10 @@ function classNames(...classes: any) {
 
 export default function Example() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+
+  useEffect(() => {
+    console.log(sarkaraProducts);
+  }, []);
 
   return (
     <div className="bg-white">
@@ -179,7 +497,7 @@ export default function Example() {
 
               {/* Filters */}
               <form className="mt-4 border-t border-gray-200">
-                <h3 className="sr-only">Categories</h3>
+                {/* <h3 className="sr-only">Categories</h3>
                 <ul role="list" className="px-2 py-3 font-medium text-gray-900">
                   {subCategories.map((category) => (
                     <li key={category.name}>
@@ -188,7 +506,7 @@ export default function Example() {
                       </a>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
 
                 {filters.map((section) => (
                   <Disclosure
@@ -333,7 +651,7 @@ export default function Example() {
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
-                <h3 className="sr-only">Categories</h3>
+                {/* <h3 className="sr-only">Categories</h3>
                 <ul
                   role="list"
                   className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
@@ -343,7 +661,7 @@ export default function Example() {
                       <a href={category.href}>{category.name}</a>
                     </li>
                   ))}
-                </ul>
+                </ul> */}
 
                 {filters.map((section) => (
                   <Disclosure
@@ -421,17 +739,22 @@ export default function Example() {
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                  {products.map((product) => (
+                  {sarkaraProducts.map((product) => (
                     <div key={product.id} className="group relative">
                       <img
-                        alt={product.imageAlt}
+                        alt={product.name}
                         src={product.imageSrc}
-                        className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                        className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
                       />
                       <div className="mt-4 flex justify-between">
                         <div>
-                          <h3 className="text-sm text-gray-700">
-                            <a href={product.href}>
+                          <h3 className="text-md font-bold text-sarkara-sign-1">
+                            <a
+                              href={
+                                "menu/" +
+                                product.name.toLowerCase().replace(/\s+/g, "-")
+                              }
+                            >
                               <span
                                 aria-hidden="true"
                                 className="absolute inset-0"
@@ -439,12 +762,12 @@ export default function Example() {
                               {product.name}
                             </a>
                           </h3>
-                          <p className="mt-1 text-sm text-gray-500">
-                            {product.color}
+                          <p className="mt-1 text-sm text-gray-500 capitalize">
+                            {product.categories[0]}
                           </p>
                         </div>
-                        <p className="text-sm font-medium text-gray-900">
-                          {product.price}
+                        <p className="text-md font-medium text-sarkara-sign">
+                          {formatToIDR(product.price)}
                         </p>
                       </div>
                     </div>
