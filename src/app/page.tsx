@@ -8,7 +8,11 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
-  return <Homepage />;
+  return (
+    <>
+      <Homepage />
+    </>
+  );
 };
 
 export default page;
