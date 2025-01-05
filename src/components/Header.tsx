@@ -7,7 +7,7 @@ const navigation = [
   { name: "Beranda", href: "/" },
   { name: "Menu", href: "/menu" },
   { name: "News", href: "/news" },
-  { name: "Hubungi Kami", href: "/about-us" },
+  { name: "Hubungi Kami", href: "/contact" },
 ];
 
 const Header = () => {
