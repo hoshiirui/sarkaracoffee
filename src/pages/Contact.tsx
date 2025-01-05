@@ -13,8 +13,10 @@ export default function Contact() {
       <Header />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-6 pt-24">
         <div className="flex items-center justify-center flex-col mb-8 lg:mb-12 gap-3">
-          <p className="text-3xl text-sarkara-sign font-bold">Hubungi Kami</p>
-          <p className="text-slate-400 text-sm">
+          <p className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl mt-2">
+            Hubungi Kami
+          </p>
+          <p className="mt-2 text-lg/8 text-gray-500">
             Ada kritik atau saran? Langsung hubungi kami melalui kontak di
             bawah!
           </p>
@@ -190,8 +192,10 @@ export default function Contact() {
           </div>
         </div>
         <div className="flex items-center justify-center flex-col mb-8 mt-24 lg:mb-12 gap-3">
-          <p className="text-3xl text-sarkara-sign font-bold">Lokasi Kami</p>
-          <p className="text-slate-400 text-sm">
+          <p className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl mt-2">
+            Lokasi Kami
+          </p>
+          <p className="mt-2 text-lg/8 text-gray-500">
             Temukan dan kunjungi kami di lokasi berikut!
           </p>
         </div>
