@@ -8,6 +8,8 @@ import { Instagram, InstagramIcon } from "lucide-react";
 import { Promo } from "@/types/Promo";
 import { useState } from "react";
 import Modal from "@/components/Modal";
+import Footer from "@/components/Footer";
+import Link from "next/link";
 
 const posts = [
   {
@@ -52,7 +54,7 @@ export default function Homepage() {
 
   return (
     <div className="bg-white min-h-screen">
-      <Header />
+      <Header active="Beranda" />
 
       {/* bagian hero */}
       <div className=" bg-[#F4F2EF]">
@@ -178,12 +180,14 @@ export default function Homepage() {
             </article>
           ))}
         </div>
-        <button
-          type="button"
-          className="rounded-md bg-sarkara-sign-1 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-sarkara-sign-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sarkara-sign-2 mt-10"
-        >
-          Lihat Promo Lainnya
-        </button>
+        <Link href={`/promo`}>
+          <button
+            type="button"
+            className="rounded-md bg-sarkara-sign-1 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-sarkara-sign-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sarkara-sign-2 mt-10"
+          >
+            Lihat Promo Lainnya
+          </button>
+        </Link>
       </div>
 
       {/* bagian fitur */}
@@ -347,6 +351,7 @@ export default function Homepage() {
           product={selectedPromo}
         />
       )}
+      <Footer />
     </div>
   );
 }

@@ -7,11 +7,12 @@ import Header from "@/components/Header";
 import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import Modal from "@/components/Modal";
+import Footer from "@/components/Footer";
 
 export default function Contact() {
   return (
     <div className="bg-white min-h-screen">
-      <Header />
+      <Header active="Hubungi Kami" />
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-6 pt-24">
         <div className="flex items-center justify-center flex-col mb-8 lg:mb-12 gap-3">
           <p className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl mt-2">
@@ -212,6 +213,7 @@ export default function Contact() {
           ></iframe>
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

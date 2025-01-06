@@ -253,11 +253,9 @@ export default function Modal({
                       >
                         {menuB && (
                           <p className="text-sm font-medium text-gray-900 text-justify mt-2">
-                            <p className="text-sm font-medium text-gray-900 text-justify mt-2">
-                              {product.menuB
-                                ? product.menuB
-                                : "Semua menu selama syarat promo terpenuhi"}
-                            </p>
+                            {product.menuB
+                              ? product.menuB
+                              : "Semua menu selama syarat promo terpenuhi"}
                           </p>
                         )}
                       </div>

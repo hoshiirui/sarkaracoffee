@@ -10,7 +10,7 @@ const navigation = [
   { name: "Hubungi Kami", href: "/contact" },
 ];
 
-const Header = () => {
+const Header = ({ active }: { active: string }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -34,12 +34,16 @@ const Header = () => {
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+        <div className="hidden lg:flex lg:items-center lg:gap-x-12">
           {navigation.map((item) => (
             <a
               key={item.name}
               href={item.href}
-              className="text-sm/6 font-semibold text-gray-900"
+              className={`text-sm/6 text-gray-900 hover:text-sarkara-sign-2 ${
+                item.name === active
+                  ? "font-bold text-sarkara-sign-1"
+                  : "font-semibold"
+              }`}
             >
               {item.name}
             </a>

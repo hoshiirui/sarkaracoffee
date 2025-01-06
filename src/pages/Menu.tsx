@@ -22,6 +22,7 @@ import {
 import Header from "@/components/Header";
 import { formatToIDR } from "@/helper/idrFormatter";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 // const sortOptions = [
 //   { name: "Rekomendasi", href: "#", current: true },
@@ -498,7 +499,7 @@ export default function SarkaraMenu() {
 
   return (
     <div className="bg-white">
-      <Header />
+      <Header active="Menu" />
       <div>
         {/* Mobile filter dialog */}
         <Dialog
@@ -859,6 +860,7 @@ export default function SarkaraMenu() {
           </section>
         </main>
       </div>
+      <Footer />
     </div>
   );
 }
