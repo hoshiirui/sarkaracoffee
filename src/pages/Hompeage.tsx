@@ -1,12 +1,13 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
 import Header from "@/components/Header";
 import { Instagram, InstagramIcon } from "lucide-react";
+import { Promo } from "@/types/Promo";
+import { useState } from "react";
+import Modal from "@/components/Modal";
 
 const posts = [
   {
@@ -14,17 +15,19 @@ const posts = [
     title: "Promo Weekend - Free Mineral Water",
     href: "#",
     description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
+      "Dapatkan free mineral water Aqua setiap weekend dengan minimal belanja Rp. 70.000. Yuk pesan sekarang!",
     date: "Selama Bulan Januari",
     datetime: "2020-03-16",
     category: { title: "Free Items", href: "#" },
+    minTrans: 70000,
   },
   {
     id: 2,
     title: "Diskon 35% Menu Kategori Non-Coffee",
     href: "#",
     description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
+      "Dapatkan diskon sebesar 35% untuk menu-menu dengan kategori non-coffee. Untuk keterangan menu dapat dilihat di bagian Menu Berlaku. Yuk pesan sekarang!",
+    menuB: "Matcha, Tea Series",
     date: "Weekend",
     datetime: "2020-03-16",
     category: { title: "Discount", href: "#" },
@@ -34,48 +37,18 @@ const posts = [
     title: "Dapatkan Extra Porsi Pisang Goreng",
     href: "#",
     description:
-      "Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.",
+      "Dapatkan extra porsi pisang goreng untuk pembelian all variant pisang goreng sesuai tanggal yang berlaku. Yuk pesan sekarang!",
     date: "14 Januari - 14 Februari 2025",
+    menuB: "Pisang Goreng all Variant",
     datetime: "2020-03-16",
     category: { title: "Extras", href: "#" },
   },
   // More posts...
 ];
 
-const carouselData = [
-  {
-    backgroundImage: "/assets/hero/mnd09.jpg",
-    withAttribute: {
-      title: "A Moment That Blooms",
-      description:
-        "As the snow of white Christmas falling down, we made our first promise to stay with each other, creating a new love story that lasts forever...",
-    },
-  },
-  {
-    backgroundImage: "/assets/hero/mal01.jpg",
-    withAttribute: {
-      title: "Preserve Your Moments",
-      description:
-        "The only real treasure is in your head. Memories are better than diamonds and nobody can steal them from you",
-    },
-  },
-  {
-    backgroundImage: "/assets/hero/mnd10.jpg",
-    withAttribute: {
-      title: "A Moment That Shine",
-      description:
-        "Memory is a way of holding onto the things you love, the things you are, the things you never want to lose. Remembering is an act of resurrection, each repetition a vital layer of mourning, each one a healing layer",
-    },
-  },
-];
-
 export default function Homepage() {
-  const pagination = {
-    clickable: true,
-    renderBullet: function (index: any, className: any) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
-    },
-  };
+  const [selectedPromo, setSelectedPromo] = useState<Promo>();
+  const [promoModalVisible, setPromoModalVisible] = useState(false);
 
   return (
     <div className="bg-white min-h-screen">
@@ -84,12 +57,12 @@ export default function Homepage() {
       {/* bagian hero */}
       <div className=" bg-[#F4F2EF]">
         <div className="grid-cols-2 grid gap-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
-          <div className="col-span-1 flex flex-col justify-center">
-            <p className="text-sarkara-sign-1 font-bold text-7xl font-fraunces">
+          <div className="lg:col-span-1 col-span-full flex flex-col justify-center items-center lg:items-start mt-16 lg:mt-0">
+            <p className="text-sarkara-sign-1 font-bold text-7xl font-fraunces lg:text-left text-center">
               Great simple
               <br /> coffee
             </p>
-            <p className="text-xl text-[#C2A487] mt-8">
+            <p className="text-xl text-[#C2A487] mt-8 lg:text-left text-center max-w-lg lg:max-w-none">
               Di antara tegukan kopi dan tawa bersama teman, mimpi besar untuk
               masa depan tumbuh perlahan
             </p>
@@ -102,7 +75,7 @@ export default function Homepage() {
               </button>
             </div>
           </div>
-          <div className="col-span-1 flex flex-col items-center justify-center">
+          <div className="lg:col-span-1 col-span-full flex flex-col items-center justify-center">
             <Image
               className="w-[80%]"
               src={`/images/hero-coffee.png`}
@@ -188,12 +161,17 @@ export default function Homepage() {
               </div>
               <div className="group relative">
                 <h3 className="mt-3 text-xl/6 font-semibold text-gray-900 group-hover:text-gray-600">
-                  <a href={post.href}>
-                    <span className="absolute inset-0" />
-                    {post.title}
-                  </a>
+                  <span className="inset-0" />
+                  {post.title}
                 </h3>
-                <button className="mt-5 line-clamp-3 text-sm/6 text-sarkara-sign-1 font-bold">
+                <button
+                  className="mt-5 line-clamp-3 text-sm/6 text-sarkara-sign-1 font-bold"
+                  type="button"
+                  onClick={() => {
+                    setSelectedPromo(post);
+                    setPromoModalVisible(true);
+                  }}
+                >
                   Lihat Selengkapnya
                 </button>
               </div>
@@ -362,46 +340,13 @@ export default function Homepage() {
           </div>
         </div>
       </div>
-
-      {/* <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{ delay: 3000 }}
-        navigation
-        pagination={pagination}
-        modules={[Pagination]}
-        className="mySwiper"
-      >
-        {carouselData.map((data, index) => (
-          <SwiperSlide key={index}>
-            <div className="relative h-screen">
-              <Image
-                className="absolute top-0 left-0 w-full h-full object-cover"
-                src={data.backgroundImage}
-                layout="fill"
-                alt="tokisaki-bg"
-              />
-              <div className="absolute top-0 left-0 w-full h-full bg-black opacity-40"></div>
-              <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center flex items-center justify-center">
-                {data.withAttribute ? (
-                  <div className="text-center">
-                    <h2 className="lg:text-6xl text-4xl mb-4 uppercase tracking-widest text-white">
-                      {data.withAttribute.title}
-                    </h2>
-                    <p className="text-lg mb-4 max-w-2xl mx-auto text-white italic px-6">
-                      {data.withAttribute.description}
-                    </p>
-                    <button className="bg-transparent tracking-wider border border-white uppercase hover:bg-primary500 text-white py-2 px-8 rounded">
-                      BOOK NOW
-                    </button>
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper> */}
+      {selectedPromo && (
+        <Modal
+          isVisible={promoModalVisible}
+          onClose={() => setPromoModalVisible(false)}
+          product={selectedPromo}
+        />
+      )}
     </div>
   );
 }

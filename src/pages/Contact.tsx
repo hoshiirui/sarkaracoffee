@@ -6,6 +6,7 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
+import Modal from "@/components/Modal";
 
 export default function Contact() {
   return (
