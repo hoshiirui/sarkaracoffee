@@ -23,6 +23,8 @@ import Header from "@/components/Header";
 import { formatToIDR } from "@/helper/idrFormatter";
 import Image from "next/image";
 import Footer from "@/components/Footer";
+import { MenuSarkara } from "@/types/MenuSarkara";
+import ProductModal from "@/components/ProductModal";
 
 // const sortOptions = [
 //   { name: "Rekomendasi", href: "#", current: true },
@@ -81,6 +83,8 @@ const sarkaraProducts = [
     recPrior: 10,
     menuType: "signature",
     categories: ["ice"],
+    productDetail:
+      "Kopi khas Sarkara dengan perpaduan rasa unik dan menyegarkan.",
   },
   {
     id: 2,
@@ -90,6 +94,8 @@ const sarkaraProducts = [
     recPrior: 10,
     menuType: "signature",
     categories: ["ice"],
+    productDetail:
+      "Minuman tanpa alkohol dengan kombinasi rasa istimewa dan menyegarkan.",
   },
   {
     id: 3,
@@ -99,6 +105,7 @@ const sarkaraProducts = [
     recPrior: 10,
     menuType: "espresso",
     categories: ["hot"],
+    productDetail: "Espresso klasik dengan cita rasa kuat dan aroma khas kopi.",
   },
   {
     id: 4,
@@ -108,6 +115,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "espresso",
     categories: ["hot"],
+    productDetail: "Espresso ganda dengan intensitas rasa yang lebih kuat.",
   },
   {
     id: 5,
@@ -117,6 +125,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "espresso",
     categories: ["hot", "ice"],
+    productDetail:
+      "Espresso yang diencerkan dengan air panas atau dingin, cocok bagi pencinta kopi hitam.",
   },
   {
     id: 6,
@@ -126,6 +136,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["hot", "ice"],
+    productDetail:
+      "Perpaduan kopi dengan susu, menghasilkan rasa yang lembut dan nikmat.",
   },
   {
     id: 7,
@@ -135,6 +147,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["hot", "ice"],
+    productDetail:
+      "Espresso dengan susu kukus, menghasilkan rasa yang creamy dan lembut.",
   },
   {
     id: 8,
@@ -144,6 +158,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["hot", "ice"],
+    productDetail:
+      "Latte dengan tambahan sirup pilihan, memberikan variasi rasa yang menarik.",
   },
   {
     id: 9,
@@ -153,6 +169,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["hot", "ice"],
+    productDetail:
+      "Espresso dengan susu kukus dan buih susu yang lembut, menghasilkan rasa yang kaya.",
   },
   {
     id: 10,
@@ -162,6 +180,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["hot", "ice"],
+    productDetail:
+      "Cappucino dengan tambahan cokelat, menghasilkan rasa yang manis dan nikmat.",
   },
   {
     id: 11,
@@ -171,6 +191,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["ice"],
+    productDetail:
+      "Perpaduan matcha dengan kopi dan susu, menghasilkan rasa unik dan menyegarkan.",
   },
   {
     id: 12,
@@ -180,6 +202,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["ice"],
+    productDetail: "Kopi dengan cita rasa red velvet yang lembut dan creamy.",
   },
   {
     id: 13,
@@ -189,6 +212,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "coffee",
     categories: ["ice"],
+    productDetail:
+      "Kopi dengan tambahan biskuit Oreo, menghadirkan rasa yang unik dan renyah.",
   },
   {
     id: 14,
@@ -198,6 +223,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["hot", "ice"],
+    productDetail:
+      "Minuman hangat atau dingin dengan teh hijau matcha yang lembut dan menyegarkan.",
   },
   {
     id: 15,
@@ -207,6 +234,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["hot", "ice"],
+    productDetail: "Latte dengan cita rasa red velvet yang lembut dan creamy.",
   },
   {
     id: 16,
@@ -216,6 +244,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["hot", "ice"],
+    productDetail: "Latte dengan rasa taro yang unik dan eksotis.",
   },
   {
     id: 17,
@@ -225,6 +254,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["hot", "ice"],
+    productDetail: "Minuman cokelat hangat atau dingin yang kaya dan lembut.",
   },
   {
     id: 18,
@@ -234,6 +264,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["hot", "ice"],
+    productDetail: "Susu segar dengan aroma dan rasa vanilla yang lembut.",
   },
   {
     id: 19,
@@ -243,6 +274,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["ice"],
+    productDetail:
+      "Susu vanilla dengan tambahan saus karamel, menghasilkan rasa yang manis dan karamelis.",
   },
   {
     id: 20,
@@ -252,6 +285,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["ice"],
+    productDetail: "Susu vanilla dengan aroma dan rasa hazelnut yang khas.",
   },
   {
     id: 21,
@@ -261,6 +295,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["ice"],
+    productDetail: "Susu vanilla dengan campuran biskuit Oreo yang renyah.",
   },
   {
     id: 22,
@@ -270,6 +305,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["ice"],
+    productDetail: "Minuman cokelat dengan aroma dan rasa hazelnut yang khas.",
   },
   {
     id: 23,
@@ -279,6 +315,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "non-coffee",
     categories: ["ice"],
+    productDetail: "Minuman cokelat dengan campuran biskuit Oreo yang renyah.",
   },
   {
     id: 24,
@@ -288,6 +325,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["hot", "ice"],
+    productDetail: "Teh panas atau dingin yang menyegarkan.",
   },
   {
     id: 25,
@@ -297,6 +335,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["hot", "ice"],
+    productDetail: "Teh dengan rasa leci yang manis dan menyegarkan.",
   },
   {
     id: 26,
@@ -306,6 +345,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["hot", "ice"],
+    productDetail:
+      "Teh dengan perasan lemon, memberikan rasa yang segar dan asam.",
   },
   {
     id: 27,
@@ -315,6 +356,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["hot", "ice"],
+    productDetail: "Teh dengan rasa stroberi yang manis dan menyegarkan.",
   },
   {
     id: 28,
@@ -324,6 +366,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["ice"],
+    productDetail: "Minuman segar dengan rasa buah-buahan.",
   },
   {
     id: 29,
@@ -333,6 +376,8 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["ice"],
+    productDetail:
+      "Minuman segar dengan rasa stroberi yang manis dan menyegarkan.",
   },
   {
     id: 30,
@@ -342,6 +387,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["ice"],
+    productDetail: "Minuman segar dengan rasa lemon yang asam dan menyegarkan.",
   },
   {
     id: 31,
@@ -351,6 +397,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["ice"],
+    productDetail: "Minuman segar dengan rasa leci yang manis dan menyegarkan.",
   },
   {
     id: 32,
@@ -360,6 +407,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "others",
     categories: ["hot", "ice"],
+    productDetail: "Air mineral untuk menemani hidangan Anda.",
   },
   {
     id: 33,
@@ -369,6 +417,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Nasi goreng yang lezat dan mengenyangkan.",
   },
   {
     id: 34,
@@ -378,6 +427,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Mie instan goreng yang lengkap dengan bumbu dan topping.",
   },
   {
     id: 35,
@@ -387,6 +437,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Mie instan kuah yang lengkap dengan bumbu dan topping.",
   },
   {
     id: 36,
@@ -396,6 +447,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Nasi putih hangat yang siap disajikan.",
   },
   {
     id: 37,
@@ -405,6 +457,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Telur sebagai lauk pendamping.",
   },
   {
     id: 38,
@@ -414,6 +467,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Kentang goreng renyah dan gurih.",
   },
   {
     id: 39,
@@ -423,6 +477,7 @@ const sarkaraProducts = [
     recPrior: 6,
     menuType: "food",
     categories: [],
+    productDetail: "Roti panggang yang hangat dan lezat.",
   },
   {
     id: 40,
@@ -433,25 +488,14 @@ const sarkaraProducts = [
     menuType: "food",
     categories: [],
     variants: [
-      {
-        name: "coklat",
-        add: 0,
-      },
-      {
-        name: "keju",
-        add: 0,
-      },
-      {
-        name: "mix",
-        add: 2000,
-      },
+      { name: "coklat", add: 0 },
+      { name: "keju", add: 0 },
+      { name: "mix", add: 2000 },
     ],
+    productDetail:
+      "Pisang goreng renyah dengan pilihan topping cokelat, keju, atau mix.",
   },
 ];
-
-// function classNames(...classes: any) {
-//   return classes.filter(Boolean).join(" ");
-// }
 
 export default function SarkaraMenu() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -460,6 +504,8 @@ export default function SarkaraMenu() {
   const [activeMenuType, setActiveMenuType] = useState("none");
   const [selectedProducts, setSelectedProducts] = useState(sarkaraProducts);
   const [filterArray, setFilterArray] = useState<string[]>([]);
+  const [selectedMenu, setSelectedMenu] = useState<MenuSarkara>();
+  const [showMenuModal, setShowMenuModal] = useState(false);
 
   useEffect(() => {
     function filterProductsByActiveFilters(
@@ -867,10 +913,17 @@ export default function SarkaraMenu() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3">
+              <div className="lg:col-span-3 col-span-2">
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
                   {selectedProducts.map((product) => (
-                    <div key={product.id} className="group relative">
+                    <div
+                      key={product.id}
+                      className="group relative"
+                      onClick={() => {
+                        setSelectedMenu(product);
+                        setShowMenuModal(true);
+                      }}
+                    >
                       <img
                         alt={product.name}
                         src={`images/products/${product.menuType}/${product.imageSrc}`}
@@ -878,18 +931,11 @@ export default function SarkaraMenu() {
                       />
                       <div className="mt-4">
                         <h3 className="text-md font-bold text-sarkara-sign-1">
-                          <a
-                            href={
-                              "menu/" +
-                              product.name.toLowerCase().replace(/\s+/g, "-")
-                            }
-                          >
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0"
-                            />
-                            {product.name}
-                          </a>
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-0"
+                          />
+                          {product.name}
                         </h3>
                         <p className="text-lg md:text-md font-bold text-sarkara-sign mt-1">
                           {formatToIDR(product.price)}
@@ -910,6 +956,13 @@ export default function SarkaraMenu() {
           </section>
         </main>
       </div>
+      {selectedMenu && (
+        <ProductModal
+          isVisible={showMenuModal}
+          onClose={() => setShowMenuModal(false)}
+          product={selectedMenu}
+        />
+      )}
       <Footer />
     </div>
   );
