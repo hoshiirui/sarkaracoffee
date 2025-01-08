@@ -76,8 +76,7 @@ const sarkaraProducts = [
   {
     id: 1,
     name: "Sarkara Original Coffee",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "original.jpg",
     price: 16000,
     recPrior: 10,
     menuType: "signature",
@@ -86,8 +85,7 @@ const sarkaraProducts = [
   {
     id: 2,
     name: "Sarkara Speciality Mocktail",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "mocktail.jpg",
     price: 18000,
     recPrior: 10,
     menuType: "signature",
@@ -96,8 +94,7 @@ const sarkaraProducts = [
   {
     id: 3,
     name: "Espresso Single",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "single.webp",
     price: 10000,
     recPrior: 10,
     menuType: "espresso",
@@ -106,8 +103,7 @@ const sarkaraProducts = [
   {
     id: 4,
     name: "Espresso Double",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "double.webp",
     price: 12000,
     recPrior: 6,
     menuType: "espresso",
@@ -116,8 +112,7 @@ const sarkaraProducts = [
   {
     id: 5,
     name: "Americano",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "americano.webp",
     price: 15000,
     recPrior: 6,
     menuType: "espresso",
@@ -126,8 +121,7 @@ const sarkaraProducts = [
   {
     id: 6,
     name: "Kopi Susu",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "kopisusu.webp",
     price: 15000,
     recPrior: 6,
     menuType: "coffee",
@@ -136,8 +130,7 @@ const sarkaraProducts = [
   {
     id: 7,
     name: "Latte",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "latte.webp",
     price: 15000,
     recPrior: 6,
     menuType: "coffee",
@@ -146,8 +139,7 @@ const sarkaraProducts = [
   {
     id: 8,
     name: "Latte + Syrup",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "lattesyr.jpg",
     price: 20000,
     recPrior: 6,
     menuType: "coffee",
@@ -156,8 +148,7 @@ const sarkaraProducts = [
   {
     id: 9,
     name: "Cappucino",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "cappucino.webp",
     price: 17000,
     recPrior: 6,
     menuType: "coffee",
@@ -166,8 +157,7 @@ const sarkaraProducts = [
   {
     id: 10,
     name: "Mochacino",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "mochaccino.jpg",
     price: 17000,
     recPrior: 6,
     menuType: "coffee",
@@ -176,8 +166,7 @@ const sarkaraProducts = [
   {
     id: 11,
     name: "Matcha Coffee Milk",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "matchacoffee.jpg",
     price: 20000,
     recPrior: 6,
     menuType: "coffee",
@@ -186,8 +175,7 @@ const sarkaraProducts = [
   {
     id: 12,
     name: "Redvelvet Coffee Milk",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "redvelvetcoffee.jpg",
     price: 20000,
     recPrior: 6,
     menuType: "coffee",
@@ -196,8 +184,7 @@ const sarkaraProducts = [
   {
     id: 13,
     name: "Oreo Coffee Milk",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "redvelvetcoffee.jpg",
     price: 20000,
     recPrior: 6,
     menuType: "coffee",
@@ -206,8 +193,7 @@ const sarkaraProducts = [
   {
     id: 14,
     name: "Matcha Latte",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "matchalatte.jpg",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -216,8 +202,7 @@ const sarkaraProducts = [
   {
     id: 15,
     name: "Redvelvet Latte",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "redvelvetlatte.jpeg",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -226,8 +211,7 @@ const sarkaraProducts = [
   {
     id: 16,
     name: "Taro Latte",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "tarolatte.webp",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -236,8 +220,7 @@ const sarkaraProducts = [
   {
     id: 17,
     name: "Chocolatte",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "chocolatte.jpg",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -246,8 +229,7 @@ const sarkaraProducts = [
   {
     id: 18,
     name: "Vanilla Milk Original",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "vanillamilk.jpg",
     price: 15000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -256,8 +238,7 @@ const sarkaraProducts = [
   {
     id: 19,
     name: "Vanilla Caramel",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "vanillacaramel.jpg",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -266,8 +247,7 @@ const sarkaraProducts = [
   {
     id: 20,
     name: "Vanilla Hazelnut",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "vanillahazelnut.jpeg",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -276,8 +256,7 @@ const sarkaraProducts = [
   {
     id: 21,
     name: "Vanilla Oreo",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "vanillaoreo.jpeg",
     price: 16000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -286,8 +265,7 @@ const sarkaraProducts = [
   {
     id: 22,
     name: "Choco Hazelnut",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "chocohazelnut.jpg",
     price: 18000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -296,8 +274,7 @@ const sarkaraProducts = [
   {
     id: 23,
     name: "Choco Oreo",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "chocooreo.webp",
     price: 18000,
     recPrior: 6,
     menuType: "non-coffee",
@@ -306,8 +283,7 @@ const sarkaraProducts = [
   {
     id: 24,
     name: "Tea",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "tea.jpg",
     price: 6000,
     recPrior: 6,
     menuType: "others",
@@ -316,8 +292,7 @@ const sarkaraProducts = [
   {
     id: 25,
     name: "Leci Tea",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "lycheetea.jpg",
     price: 10000,
     recPrior: 6,
     menuType: "others",
@@ -326,8 +301,7 @@ const sarkaraProducts = [
   {
     id: 26,
     name: "Lemon Tea",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "lemontea.jpg",
     price: 10000,
     recPrior: 6,
     menuType: "others",
@@ -336,8 +310,7 @@ const sarkaraProducts = [
   {
     id: 27,
     name: "Strawberry Tea",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "strawberrytea.jpg",
     price: 10000,
     recPrior: 6,
     menuType: "others",
@@ -346,8 +319,7 @@ const sarkaraProducts = [
   {
     id: 28,
     name: "Virgin Squash",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "virginsquash.jpg",
     price: 15000,
     recPrior: 6,
     menuType: "others",
@@ -356,8 +328,7 @@ const sarkaraProducts = [
   {
     id: 29,
     name: "Strawberry Squash",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "strawberrysquash.jpg",
     price: 15000,
     recPrior: 6,
     menuType: "others",
@@ -366,8 +337,7 @@ const sarkaraProducts = [
   {
     id: 30,
     name: "Lemon Squash",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "lemonsquash.jpg",
     price: 15000,
     recPrior: 6,
     menuType: "others",
@@ -376,8 +346,7 @@ const sarkaraProducts = [
   {
     id: 31,
     name: "Leci Squash",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "lycheesquash.jpeg",
     price: 15000,
     recPrior: 6,
     menuType: "others",
@@ -386,8 +355,7 @@ const sarkaraProducts = [
   {
     id: 32,
     name: "Mineral Water",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "mineralwater.jpeg",
     price: 5000,
     recPrior: 6,
     menuType: "others",
@@ -396,8 +364,7 @@ const sarkaraProducts = [
   {
     id: 33,
     name: "Nasi Goreng",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "nasgor.jpg",
     price: 15000,
     recPrior: 6,
     menuType: "food",
@@ -406,8 +373,7 @@ const sarkaraProducts = [
   {
     id: 34,
     name: "Mie Instan Goreng Lengkap",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "miegoreng.jpg",
     price: 12000,
     recPrior: 6,
     menuType: "food",
@@ -416,8 +382,7 @@ const sarkaraProducts = [
   {
     id: 35,
     name: "Mie Instan Kuah Lengkap",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "miekuah.jpeg",
     price: 12000,
     recPrior: 6,
     menuType: "food",
@@ -426,8 +391,7 @@ const sarkaraProducts = [
   {
     id: 36,
     name: "Nasi Putih",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "nasiputih.webp",
     price: 5000,
     recPrior: 6,
     menuType: "food",
@@ -436,8 +400,7 @@ const sarkaraProducts = [
   {
     id: 37,
     name: "Telur",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "telur.jpg",
     price: 5000,
     recPrior: 6,
     menuType: "food",
@@ -446,8 +409,7 @@ const sarkaraProducts = [
   {
     id: 38,
     name: "Kentang Goreng",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "kentanggoreng.jpg",
     price: 10000,
     recPrior: 6,
     menuType: "food",
@@ -456,8 +418,7 @@ const sarkaraProducts = [
   {
     id: 39,
     name: "Roti Panggang",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "ropang.webp",
     price: 10000,
     recPrior: 6,
     menuType: "food",
@@ -466,8 +427,7 @@ const sarkaraProducts = [
   {
     id: 40,
     name: "Pisang Goreng",
-    imageSrc:
-      "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
+    imageSrc: "pisanggoreng.jpg",
     price: 10000,
     recPrior: 6,
     menuType: "food",
@@ -913,7 +873,7 @@ export default function SarkaraMenu() {
                     <div key={product.id} className="group relative">
                       <img
                         alt={product.name}
-                        src={product.imageSrc}
+                        src={`images/products/${product.menuType}/${product.imageSrc}`}
                         className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
                       />
                       <div className="mt-4">

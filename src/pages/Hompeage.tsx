@@ -116,7 +116,7 @@ export default function Homepage() {
           <div className="flex flex-col justify-center">
             <img
               alt="Product screenshot"
-              src="https://tailwindui.com/plus/img/component-images/dark-project-app-screenshot.png"
+              src={`images/home/lobby.jpg`}
               width={2432}
               height={1442}
             />
@@ -260,7 +260,7 @@ export default function Homepage() {
               <div className="flex flex-1 items-center [container-type:inline-size] max-lg:py-6 lg:pb-2">
                 <img
                   className="h-[min(152px,40cqw)] object-cover"
-                  src="https://tailwindui.com/plus/img/component-images/bento-03-security.png"
+                  src="/images/home/label.jpg"
                   alt=""
                 />
               </div>
