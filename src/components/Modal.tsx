@@ -108,7 +108,7 @@ export default function Modal({
               <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                 <img
                   alt={`diskon`}
-                  src={`images/coffee-cup-home.jpg`}
+                  src={`/images/promo/v/${product.id}.jpg`}
                   className="aspect-[2/3] w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5"
                 />
                 <div className="sm:col-span-8 lg:col-span-7">
@@ -116,8 +116,7 @@ export default function Modal({
                     {product.title}
                   </h2>
                   <p className="text-sm font-medium text-gray-900 text-justify mt-4">
-                    Dapatkan free mineral water Aqua setiap weekend dengan
-                    minimal belanja Rp. 70.000. Yuk pesan sekarang!
+                    {product.description}
                   </p>
                   <section
                     aria-labelledby="category-heading"

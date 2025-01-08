@@ -918,7 +918,7 @@ export default function SarkaraMenu() {
                   {selectedProducts.map((product) => (
                     <div
                       key={product.id}
-                      className="group relative"
+                      className="group relative cursor-pointer"
                       onClick={() => {
                         setSelectedMenu(product);
                         setShowMenuModal(true);

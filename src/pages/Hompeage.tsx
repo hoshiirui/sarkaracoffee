@@ -319,8 +319,8 @@ export default function Homepage() {
             />
             <defs>
               <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-                <stop stopColor="#7775D6" />
-                <stop offset={1} stopColor="#E935C1" />
+                <stop stopColor="#C7644F" />
+                <stop offset={1} stopColor="#ECA68D" />
               </radialGradient>
             </defs>
           </svg>

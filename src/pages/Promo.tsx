@@ -45,37 +45,27 @@ const posts = [
   },
   {
     id: 4,
-    title: "Dapatkan Extra Porsi Pisang Goreng",
+    title: "Sarkara #3 Anniversary Special Promo",
     href: "#",
     description:
-      "Dapatkan extra porsi pisang goreng untuk pembelian all variant pisang goreng sesuai tanggal yang berlaku. Yuk pesan sekarang!",
-    date: "14 Januari - 14 Februari 2025",
-    menuB: "Pisang Goreng all Variant",
+      "Dapatkan potongan harga sebesar 50% untuk item-item yang berlaku. Tunggu apa lagi, yuk pesan sekarang!",
+    date: "14 Maret",
+    menuB: "All Sarkara Signature",
     datetime: "2020-03-16",
-    category: { title: "Extras", href: "#" },
+    category: { title: "Discount", href: "#" },
   },
   {
     id: 5,
-    title: "Dapatkan Extra Porsi Pisang Goreng",
+    title: "Makin Kenyang dengan Extra Kentang",
     href: "#",
     description:
-      "Dapatkan extra porsi pisang goreng untuk pembelian all variant pisang goreng sesuai tanggal yang berlaku. Yuk pesan sekarang!",
+      "Dapatkan gratis satu porsi kentang goreng untuk transaksi minimal Rp. 50.000. Yuk pesan sekarang!",
     date: "14 Januari - 14 Februari 2025",
-    menuB: "Pisang Goreng all Variant",
+    minTrans: 50000,
     datetime: "2020-03-16",
-    category: { title: "Extras", href: "#" },
+    category: { title: "Free Items", href: "#" },
   },
-  {
-    id: 6,
-    title: "Dapatkan Extra Porsi Pisang Goreng",
-    href: "#",
-    description:
-      "Dapatkan extra porsi pisang goreng untuk pembelian all variant pisang goreng sesuai tanggal yang berlaku. Yuk pesan sekarang!",
-    date: "14 Januari - 14 Februari 2025",
-    menuB: "Pisang Goreng all Variant",
-    datetime: "2020-03-16",
-    category: { title: "Extras", href: "#" },
-  },
+
   // More posts...
 ];
 
@@ -107,10 +97,10 @@ export default function PromoPage() {
               >
                 <Image
                   className="w-[100%] h-[200px] object-cover rounded-xl"
-                  src={"/images/coffee-cup-home.jpg"}
+                  src={`/images/promo/${post.id}.jpg`}
                   alt="discount"
-                  width={200}
-                  height={200}
+                  width={800}
+                  height={800}
                 />
                 <div className="flex items-center gap-x-4 text-xs mt-6">
                   <time dateTime={post.datetime} className="text-gray-500">
