@@ -61,12 +61,21 @@ export default function Modal({
   const [syarat, setSyarat] = useState(false);
   const [menuB, setMenuB] = useState(false);
 
-  const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
+  const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // setSyarat(false);
+    // setMenuB(false);
+    // setCaraP(false);
+  };
 
   return (
     <Dialog
       open={isVisible}
-      onClose={() => onClose()}
+      onClose={() => {
+        onClose();
+        // setSyarat(false);
+        // setMenuB(false);
+        // setCaraP(false);
+      }}
       className="relative z-10"
     >
       <DialogBackdrop
@@ -84,7 +93,12 @@ export default function Modal({
             <div className="relative flex w-full items-center overflow-hidden bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
               <button
                 type="button"
-                onClick={() => onClose()}
+                onClick={() => {
+                  onClose();
+                  // setSyarat(false);
+                  // setMenuB(false);
+                  // setCaraP(false);
+                }}
                 className="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
               >
                 <span className="sr-only">Close</span>

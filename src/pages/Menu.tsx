@@ -39,26 +39,23 @@ import Footer from "@/components/Footer";
 //   { name: "Laptop Sleeves", href: "#" },
 // ];
 
+const kategori = [
+  { value: "signature", label: "Sarkara Signature" },
+  { value: "espresso", label: "Base Espresso" },
+  { value: "coffee", label: "Coffee" },
+  { value: "non-coffee", label: "Non Coffee" },
+  { value: "others", label: "Tea & Squash & Others" },
+  { value: "food", label: "Food & Snacks" },
+];
+
 const filters = [
-  {
-    id: "kategori",
-    name: "Kategori",
-    options: [
-      { value: "signature", label: "Sarkara Signature", checked: false },
-      { value: "espresso", label: "Base Espresso", checked: false },
-      { value: "coffee", label: "Coffee", checked: true },
-      { value: "non-coffee", label: "Non Coffee", checked: false },
-      { value: "others", label: "Tea & Squash & Others", checked: false },
-      { value: "food", label: "Food & Snacks", checked: false },
-    ],
-  },
   {
     id: "varian",
     name: "Varian",
     options: [
       { value: "new", label: "Menu Baru", checked: false },
       { value: "hot", label: "Hot / Panas", checked: false },
-      { value: "ice", label: "Ice / Dingin", checked: true },
+      { value: "ice", label: "Ice / Dingin", checked: false },
     ],
   },
   // {
@@ -83,7 +80,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 10,
-    categories: ["signature", "ice"],
+    menuType: "signature",
+    categories: ["ice"],
   },
   {
     id: 2,
@@ -92,7 +90,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 18000,
     recPrior: 10,
-    categories: ["signature", "ice"],
+    menuType: "signature",
+    categories: ["ice"],
   },
   {
     id: 3,
@@ -101,7 +100,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 10,
-    categories: ["espresso", "hot"],
+    menuType: "espresso",
+    categories: ["hot"],
   },
   {
     id: 4,
@@ -110,7 +110,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 12000,
     recPrior: 6,
-    categories: ["espresso", "hot"],
+    menuType: "espresso",
+    categories: ["hot"],
   },
   {
     id: 5,
@@ -119,7 +120,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["espresso", "hot", "ice"],
+    menuType: "espresso",
+    categories: ["hot", "ice"],
   },
   {
     id: 6,
@@ -128,7 +130,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["coffee", "hot", "ice"],
+    menuType: "coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 7,
@@ -137,7 +140,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["coffee", "hot", "ice"],
+    menuType: "coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 8,
@@ -145,8 +149,9 @@ const sarkaraProducts = [
     imageSrc:
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 20000,
-    recPrior: 7,
-    categories: ["coffee", "hot", "ice"],
+    recPrior: 6,
+    menuType: "coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 9,
@@ -155,7 +160,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 17000,
     recPrior: 6,
-    categories: ["coffee", "hot", "ice"],
+    menuType: "coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 10,
@@ -164,7 +170,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 17000,
     recPrior: 6,
-    categories: ["coffee", "hot", "ice"],
+    menuType: "coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 11,
@@ -173,7 +180,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 20000,
     recPrior: 6,
-    categories: ["coffee", "ice"],
+    menuType: "coffee",
+    categories: ["ice"],
   },
   {
     id: 12,
@@ -182,7 +190,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 20000,
     recPrior: 6,
-    categories: ["coffee", "ice"],
+    menuType: "coffee",
+    categories: ["ice"],
   },
   {
     id: 13,
@@ -191,7 +200,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 20000,
     recPrior: 6,
-    categories: ["coffee", "ice"],
+    menuType: "coffee",
+    categories: ["ice"],
   },
   {
     id: 14,
@@ -200,7 +210,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "hot", "ice"],
+    menuType: "coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 15,
@@ -209,7 +220,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "hot", "ice"],
+    menuType: "non-coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 16,
@@ -218,7 +230,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "hot", "ice"],
+    menuType: "non-coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 17,
@@ -227,7 +240,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "hot", "ice"],
+    menuType: "non-coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 18,
@@ -236,7 +250,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["non-coffee", "hot", "ice"],
+    menuType: "non-coffee",
+    categories: ["hot", "ice"],
   },
   {
     id: 19,
@@ -245,7 +260,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "ice"],
+    menuType: "non-coffee",
+    categories: ["ice"],
   },
   {
     id: 20,
@@ -254,7 +270,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "ice"],
+    menuType: "non-coffee",
+    categories: ["ice"],
   },
   {
     id: 21,
@@ -263,7 +280,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    categories: ["non-coffee", "ice"],
+    menuType: "non-coffee",
+    categories: ["ice"],
   },
   {
     id: 22,
@@ -272,7 +290,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 18000,
     recPrior: 6,
-    categories: ["non-coffee", "ice"],
+    menuType: "non-coffee",
+    categories: ["ice"],
   },
   {
     id: 23,
@@ -281,7 +300,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 18000,
     recPrior: 6,
-    categories: ["non-coffee", "ice"],
+    menuType: "non-coffee",
+    categories: ["ice"],
   },
   {
     id: 24,
@@ -290,7 +310,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 6000,
     recPrior: 6,
-    categories: ["others", "hot", "ice"],
+    menuType: "others",
+    categories: ["hot", "ice"],
   },
   {
     id: 25,
@@ -299,7 +320,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 6,
-    categories: ["others", "hot", "ice"],
+    menuType: "others",
+    categories: ["hot", "ice"],
   },
   {
     id: 26,
@@ -308,7 +330,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 6,
-    categories: ["others", "hot", "ice"],
+    menuType: "others",
+    categories: ["hot", "ice"],
   },
   {
     id: 27,
@@ -317,7 +340,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 6,
-    categories: ["others", "hot", "ice"],
+    menuType: "others",
+    categories: ["hot", "ice"],
   },
   {
     id: 28,
@@ -326,7 +350,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["others", "ice"],
+    menuType: "others",
+    categories: ["ice"],
   },
   {
     id: 29,
@@ -335,7 +360,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["others", "ice"],
+    menuType: "others",
+    categories: ["ice"],
   },
   {
     id: 30,
@@ -344,7 +370,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["others", "ice"],
+    menuType: "others",
+    categories: ["ice"],
   },
   {
     id: 31,
@@ -353,7 +380,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["others", "ice"],
+    menuType: "others",
+    categories: ["ice"],
   },
   {
     id: 32,
@@ -362,7 +390,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 5000,
     recPrior: 6,
-    categories: ["others", "hot", "ice"],
+    menuType: "others",
+    categories: ["hot", "ice"],
   },
   {
     id: 33,
@@ -371,7 +400,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 15000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 34,
@@ -380,7 +410,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 12000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 35,
@@ -389,7 +420,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 12000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 36,
@@ -398,7 +430,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 5000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 37,
@@ -407,7 +440,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 5000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 38,
@@ -416,7 +450,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 39,
@@ -425,7 +460,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
   },
   {
     id: 40,
@@ -434,7 +470,8 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 10000,
     recPrior: 6,
-    categories: ["food"],
+    menuType: "food",
+    categories: [],
     variants: [
       {
         name: "coklat",
@@ -460,6 +497,7 @@ export default function SarkaraMenu() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState(filters);
+  const [activeMenuType, setActiveMenuType] = useState("none");
   const [selectedProducts, setSelectedProducts] = useState(sarkaraProducts);
   const [filterArray, setFilterArray] = useState<string[]>([]);
 
@@ -497,6 +535,11 @@ export default function SarkaraMenu() {
     setSelectedProducts(filteredProducts);
   }, [selectedFilters]);
 
+  const dataToDefault = () => {
+    setActiveMenuType("none");
+    setSelectedFilters(filters);
+  };
+
   return (
     <div className="bg-white">
       <Header active="Menu" />
@@ -531,16 +574,36 @@ export default function SarkaraMenu() {
 
               {/* Filters */}
               <form className="mt-4 border-t border-gray-200">
-                {/* <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="px-2 py-3 font-medium text-gray-900">
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href} className="block px-2 py-3">
-                        {category.name}
-                      </a>
+                <h3 className="sr-only">Categories</h3>
+                <div className="flex flex-row px-4 py-3 items-center justify-between">
+                  <p className="text-lg font-bold text-black ">Kategori</p>
+                  <p
+                    className="text-xs font-bold text-sarkara-sign-2 cursor-pointer"
+                    onClick={() => dataToDefault()}
+                  >
+                    Reset All
+                  </p>
+                </div>
+                <ul role="list" className="px-2 font-medium text-gray-900">
+                  {kategori.map((category) => (
+                    // <li key={category.name}>
+                    //   <a href={category.href} className="block px-2 py-3">
+                    //     {category.name}
+                    //   </a>
+                    // </li>
+                    <li
+                      key={category.value}
+                      onClick={() => setActiveMenuType(category.value)}
+                      className={`cursor-pointer block px-2 py-3 ${
+                        category.value === activeMenuType
+                          ? "font-bold text-sarkara-sign-1"
+                          : null
+                      }`}
+                    >
+                      <p>{category.label}</p>
                     </li>
                   ))}
-                </ul> */}
+                </ul>
 
                 {selectedFilters.map((section) => (
                   <Disclosure
@@ -708,18 +771,35 @@ export default function SarkaraMenu() {
 
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
-              <form className="hidden lg:block">
-                {/* <h3 className="sr-only">Categories</h3>
+              <form className="hidden lg:block mt-6">
+                <h3 className="sr-only">Categories</h3>
+                <div className="flex flex-row mb-4 items-center justify-between">
+                  <p className="text-lg font-bold text-black ">Kategori</p>
+                  <p
+                    className="text-xs font-bold text-sarkara-sign-2 cursor-pointer"
+                    onClick={() => dataToDefault()}
+                  >
+                    Reset All
+                  </p>
+                </div>
                 <ul
                   role="list"
                   className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900"
                 >
-                  {subCategories.map((category) => (
-                    <li key={category.name}>
-                      <a href={category.href}>{category.name}</a>
+                  {kategori.map((category) => (
+                    <li
+                      key={category.value}
+                      onClick={() => setActiveMenuType(category.value)}
+                      className={`cursor-pointer ${
+                        category.value === activeMenuType
+                          ? "font-bold text-sarkara-sign-1"
+                          : null
+                      }`}
+                    >
+                      <p>{category.label}</p>
                     </li>
                   ))}
-                </ul> */}
+                </ul>
 
                 {selectedFilters.map((section) => (
                   <Disclosure
@@ -828,28 +908,30 @@ export default function SarkaraMenu() {
                         src={product.imageSrc}
                         className="aspect-square w-full rounded-lg bg-gray-200 object-cover group-hover:opacity-75 xl:aspect-[7/8]"
                       />
-                      <div className="mt-4 flex justify-between">
-                        <div>
-                          <h3 className="text-md font-bold text-sarkara-sign-1">
-                            <a
-                              href={
-                                "menu/" +
-                                product.name.toLowerCase().replace(/\s+/g, "-")
-                              }
-                            >
-                              <span
-                                aria-hidden="true"
-                                className="absolute inset-0"
-                              />
-                              {product.name}
-                            </a>
-                          </h3>
-                          <p className="mt-1 text-sm text-gray-500 capitalize">
-                            {product.categories[0]}
-                          </p>
-                        </div>
-                        <p className="text-md md:text-sm font-medium text-sarkara-sign">
+                      <div className="mt-4">
+                        <h3 className="text-md font-bold text-sarkara-sign-1">
+                          <a
+                            href={
+                              "menu/" +
+                              product.name.toLowerCase().replace(/\s+/g, "-")
+                            }
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="absolute inset-0"
+                            />
+                            {product.name}
+                          </a>
+                        </h3>
+                        <p className="text-lg md:text-md font-bold text-sarkara-sign mt-1">
                           {formatToIDR(product.price)}
+                        </p>
+                        <p className="mt-1 text-sm text-gray-500 capitalize">
+                          {product.menuType === "food"
+                            ? "Food & Snacks "
+                            : product.menuType === "others"
+                            ? "Tea & Squash & Others"
+                            : product.menuType}
                         </p>
                       </div>
                     </div>
