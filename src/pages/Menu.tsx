@@ -210,7 +210,7 @@ const sarkaraProducts = [
       "https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg",
     price: 16000,
     recPrior: 6,
-    menuType: "coffee",
+    menuType: "non-coffee",
     categories: ["hot", "ice"],
   },
   {
@@ -526,14 +526,22 @@ export default function SarkaraMenu() {
       []
     );
 
+    //filter based on menutype
+    const filteredFirst =
+      activeMenuType === "none"
+        ? sarkaraProducts
+        : sarkaraProducts.filter(
+            (product) => product.menuType === activeMenuType
+          );
+
     setFilterArray(updatedFilterArray);
     const filteredProducts = filterProductsByActiveFilters(
-      sarkaraProducts,
+      filteredFirst,
       updatedFilterArray
     );
 
     setSelectedProducts(filteredProducts);
-  }, [selectedFilters]);
+  }, [selectedFilters, activeMenuType]);
 
   const dataToDefault = () => {
     setActiveMenuType("none");
