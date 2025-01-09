@@ -98,12 +98,14 @@ export default function Homepage() {
               masa depan tumbuh perlahan
             </p>
             <div className="mt-8 flex items-center justify-start gap-x-6">
-              <button
-                type="button"
-                className="rounded-md bg-sarkara-sign-1 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-sarkara-sign-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sarkara-sign-2"
-              >
-                Lihat Menu
-              </button>
+              <Link href={`/menu`}>
+                <button
+                  type="button"
+                  className="rounded-md bg-sarkara-sign-1 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-sarkara-sign-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sarkara-sign-2"
+                >
+                  Lihat Menu
+                </button>
+              </Link>
             </div>
           </div>
           <div className="lg:col-span-1 col-span-full flex flex-col items-center justify-center">
