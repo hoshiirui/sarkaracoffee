@@ -10,6 +10,8 @@ import {
   DisclosurePanel,
   Menu,
   MenuButton,
+  MenuItem,
+  MenuItems,
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import {
@@ -26,13 +28,12 @@ import Footer from "@/components/Footer";
 import { MenuSarkara } from "@/types/MenuSarkara";
 import ProductModal from "@/components/ProductModal";
 
-// const sortOptions = [
-//   { name: "Rekomendasi", href: "#", current: true },
-//   { name: "A - Z", href: "#", current: false },
-//   { name: "Z - A", href: "#", current: false },
-//   { name: "Termurah", href: "#", current: false },
-//   { name: "Termahal", href: "#", current: false },
-// ];
+const sortOptions = [
+  { name: "Kategori" },
+  { name: "Rekomendasi" },
+  { name: "Termurah" },
+  { name: "Termahal" },
+];
 // const subCategories = [
 //   { name: "Sarkara Signature", href: "#" },
 //   { name: "", href: "#" },
@@ -506,6 +507,7 @@ export default function SarkaraMenu() {
   const [filterArray, setFilterArray] = useState<string[]>([]);
   const [selectedMenu, setSelectedMenu] = useState<MenuSarkara>();
   const [showMenuModal, setShowMenuModal] = useState(false);
+  const [activeSort, setActiveSort] = useState("Kategori");
 
   useEffect(() => {
     function filterProductsByActiveFilters(
@@ -532,12 +534,26 @@ export default function SarkaraMenu() {
       []
     );
 
+    function sortProducts(productsObj: any) {
+      if (activeSort != "Kategori") {
+        if (activeSort === "Termahal") {
+          return [...productsObj].sort((a, b) => b.price - a.price);
+        } else if (activeSort === "Termurah") {
+          return [...productsObj].sort((a, b) => a.price - b.price);
+        } else if (activeSort === "Rekomendasi") {
+          return [...productsObj].sort((a, b) => b.recPrior - a.recPrior);
+        }
+      } else {
+        return productsObj;
+      }
+    }
+
     //filter based on menutype
     const filteredFirst =
       activeMenuType === "none"
-        ? sarkaraProducts
-        : sarkaraProducts.filter(
-            (product) => product.menuType === activeMenuType
+        ? sortProducts(sarkaraProducts)
+        : sortProducts(sarkaraProducts).filter(
+            (product: any) => product.menuType === activeMenuType
           );
 
     setFilterArray(updatedFilterArray);
@@ -547,7 +563,7 @@ export default function SarkaraMenu() {
     );
 
     setSelectedProducts(filteredProducts);
-  }, [selectedFilters, activeMenuType]);
+  }, [selectedFilters, activeMenuType, activeSort]);
 
   const dataToDefault = () => {
     setActiveMenuType("none");
@@ -736,28 +752,30 @@ export default function SarkaraMenu() {
                   </MenuButton>
                 </div>
 
-                {/* <MenuItems
+                <MenuItems
                   transition
                   className="absolute right-0 z-10 mt-2 w-40 origin-top-right rounded-md bg-white shadow-2xl ring-1 ring-black/5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
                 >
                   <div className="py-1">
                     {sortOptions.map((option) => (
                       <MenuItem key={option.name}>
-                        <a
-                          href={option.href}
-                          className={classNames(
-                            option.current
-                              ? "font-medium text-gray-900"
-                              : "text-gray-500",
+                        <div
+                          onClick={() => setActiveSort(option.name)}
+                          className={`
+                            ${
+                              option.name === activeSort
+                                ? "font-bold text-sarkara-sign-1"
+                                : "text-gray-500"
+                            }
                             "block px-4 py-2 text-sm data-[focus]:bg-gray-100 data-[focus]:outline-none"
-                          )}
+                          `}
                         >
                           {option.name}
-                        </a>
+                        </div>
                       </MenuItem>
                     ))}
                   </div>
-                </MenuItems> */}
+                </MenuItems>
               </Menu>
 
               <button

@@ -145,10 +145,10 @@ export default function Homepage() {
             >
               <Image
                 className="w-[100%] h-[200px] object-cover rounded-xl"
-                src={"/images/coffee-cup-home.jpg"}
+                src={`/images/promo/${post.id}.jpg`}
                 alt="discount"
-                width={200}
-                height={200}
+                width={800}
+                height={800}
               />
               <div className="flex items-center gap-x-4 text-xs mt-6">
                 <time dateTime={post.datetime} className="text-gray-500">
