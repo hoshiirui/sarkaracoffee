@@ -21,6 +21,7 @@ import { ClockIcon } from "@heroicons/react/24/solid";
 import { formatToIDR } from "@/helper/idrFormatter";
 import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import { MenuSarkara } from "@/types/MenuSarkara";
+import { ToastError, ToastSuccess } from "@/helper/Toast";
 
 export default function ProductModal({
   isVisible,
@@ -34,6 +35,7 @@ export default function ProductModal({
   const [pilihanSelected, setPilihanSelected] = useState("");
   const [variantChoice, setVariantChoice] = useState("");
   const [priceAdd, setPriceAdd] = useState(0);
+  const [amount, setAmount] = useState(1);
 
   useEffect(() => {
     setPilihanSelected(
@@ -53,6 +55,59 @@ export default function ProductModal({
     // setSyarat(false);
     // setMenuB(false);
     // setCaraP(false);
+  };
+
+  function hasLocalStorageItem(key: string) {
+    return localStorage.getItem(key) !== null;
+  }
+
+  const handleAddProduct = () => {
+    const orderExists = hasLocalStorageItem("order");
+
+    const newOrder = {
+      idproduk: product.id,
+      namaproduk: product.name,
+      harga: product.price + priceAdd,
+      imagehref: product.imageSrc,
+      jumlah: amount,
+      varian: variantChoice,
+      penyajian: pilihanSelected,
+    };
+
+    if (orderExists) {
+      const retrievedJson = localStorage.getItem("order");
+
+      if (retrievedJson) {
+        const existingOrder = JSON.parse(retrievedJson);
+        const existingItemIndex = existingOrder.findIndex(
+          (item: any) => item.idproduk === newOrder.idproduk
+        );
+
+        if (existingItemIndex !== -1) {
+          // Item already exists, update quantity
+          existingOrder[existingItemIndex].jumlah += newOrder.jumlah;
+        } else {
+          // Item doesn't exist, add new item
+          existingOrder.push(newOrder);
+        }
+
+        // Store the updated array back in localStorage
+        localStorage.setItem("order", JSON.stringify(existingOrder));
+
+        ToastSuccess("Berhasil menambahkan " + product.name + "!");
+      } else {
+        ToastError("Gagal menambah menu!");
+      }
+    } else {
+      const jsonArray = JSON.stringify([newOrder]);
+
+      // Store the JSON string in localStorage
+      localStorage.setItem("order", jsonArray);
+
+      ToastSuccess("Berhasil menambahkan " + product.name + "!");
+    }
+
+    console.log("click");
   };
 
   return (
@@ -115,6 +170,38 @@ export default function ProductModal({
                         {formatToIDR(product.price)}
                       </p>
                     </section>
+
+                    {/* jumlah order */}
+                    <section>
+                      <p className="text-md font-bold text-sarkara-sign-1 text-justify mt-4">
+                        Jumlah Order
+                      </p>
+                      <div className="w-1/3">
+                        <div className="flex flex-row h-10 rounded-lg bg-transparent mt-1">
+                          <button
+                            onClick={() => setAmount(amount - 1)}
+                            className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
+                          >
+                            <span className="m-auto text-2xl font-thin">−</span>
+                          </button>
+                          <input
+                            type="number"
+                            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-gray-300 text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
+                            value={amount}
+                            onChange={(event) => {
+                              setAmount(parseInt(event.target.value));
+                            }}
+                          ></input>
+                          <button
+                            onClick={() => setAmount(amount + 1)}
+                            className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
+                          >
+                            <span className="m-auto text-2xl font-thin">+</span>
+                          </button>
+                        </div>
+                      </div>
+                    </section>
+
                     {pilihanSelected === "dingin" ||
                     pilihanSelected === "panas" ? (
                       <section>
@@ -216,7 +303,10 @@ export default function ProductModal({
                     className="mt-6"
                   >
                     {/* Cara penggunaan */}
-                    <button className="bg-sarkara-sign-1 w-full py-3 rounded-full text-white font-bold">
+                    <button
+                      className="bg-sarkara-sign-1 w-full py-3 rounded-full text-white font-bold"
+                      onClick={handleAddProduct}
+                    >
                       Harga Total ・ {formatToIDR(product.price + priceAdd)}
                     </button>
                     {/* Sizes */}
