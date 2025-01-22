@@ -27,6 +27,7 @@ import Image from "next/image";
 import Footer from "@/components/Footer";
 import { MenuSarkara } from "@/types/MenuSarkara";
 import ProductModal from "@/components/ProductModal";
+import OrderList from "@/components/OrderList";
 
 const sortOptions = [
   { name: "Kategori" },
@@ -508,6 +509,7 @@ export default function SarkaraMenu() {
   const [selectedMenu, setSelectedMenu] = useState<MenuSarkara>();
   const [showMenuModal, setShowMenuModal] = useState(false);
   const [activeSort, setActiveSort] = useState("Kategori");
+  const [showOrderList, setShowOrderList] = useState(false);
 
   useEffect(() => {
     function filterProductsByActiveFilters(
@@ -968,6 +970,9 @@ export default function SarkaraMenu() {
                       </div>
                     </div>
                   ))}
+                  <button onClick={() => setShowOrderList(true)}>
+                    liatin list
+                  </button>
                 </div>
               </div>
             </div>
@@ -981,6 +986,10 @@ export default function SarkaraMenu() {
           product={selectedMenu}
         />
       )}
+      <OrderList
+        isVisible={showOrderList}
+        onClose={() => setShowOrderList(false)}
+      />
       <Footer />
     </div>
   );
