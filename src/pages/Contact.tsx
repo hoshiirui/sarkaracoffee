@@ -23,7 +23,7 @@ export default function Contact() {
             bawah!
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="col-span-1 p-8 bg-white shadow-lg rounded-xl flex gap-4 flex-col">
             <p className="text-2xl font-bold text-sarkara-sign">
               Informasi Kontak
