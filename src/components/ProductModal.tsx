@@ -72,6 +72,7 @@ export default function ProductModal({
       jumlah: amount,
       varian: variantChoice,
       penyajian: pilihanSelected,
+      tipemenu: product.menuType,
     };
 
     if (orderExists) {
@@ -107,7 +108,8 @@ export default function ProductModal({
       ToastSuccess("Berhasil menambahkan " + product.name + "!");
     }
 
-    console.log("click");
+    onClose();
+    setAmount(1);
   };
 
   return (

@@ -19,6 +19,7 @@ import {
   FunnelIcon,
   MinusIcon,
   PlusIcon,
+  ShoppingBagIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Header from "@/components/Header";
@@ -970,8 +971,12 @@ export default function SarkaraMenu() {
                       </div>
                     </div>
                   ))}
-                  <button onClick={() => setShowOrderList(true)}>
-                    liatin list
+
+                  <button
+                    onClick={() => setShowOrderList(true)}
+                    className="fixed bottom-8 right-8 bg-sarkara-sign-1 hover:bg-sarkara-sign text-white font-bold py-4 px-4 rounded-full shadow-lg"
+                  >
+                    <ShoppingBagIcon width={24} height={24} />
                   </button>
                 </div>
               </div>
