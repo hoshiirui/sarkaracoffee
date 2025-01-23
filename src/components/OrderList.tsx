@@ -173,7 +173,11 @@ export default function OrderList({
 
       // router.push("/");
     } catch (error) {
-      ToastError(error.message);
+      if (error instanceof Error) {
+        ToastError(error.message);
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
 
