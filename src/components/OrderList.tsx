@@ -7,9 +7,15 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  CheckBadgeIcon,
+  ExclamationTriangleIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { ToastError, ToastSuccess } from "@/helper/Toast";
 import { formatToIDR } from "@/helper/idrFormatter";
+import { createClient } from "@/helper/supabase/client";
+import { ArrowPathIcon } from "@heroicons/react/24/solid";
 
 interface order {
   idproduk: number;
@@ -61,6 +67,8 @@ export default function OrderList({
   const [isCheckout, setIsCheckout] = useState(false);
   const [formDescription, setFormDescription] = useState("");
   const [formName, setFormName] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isResetOrder, setIsResetOrder] = useState(false);
 
   function hasLocalStorageItem(key: string) {
     return localStorage.getItem(key) !== null;
@@ -106,6 +114,69 @@ export default function OrderList({
     }
   };
 
+  const handleCreate = async () => {
+    const supabase = createClient();
+    try {
+      const dataInsert = {
+        nama: formName,
+        status: "unpaid",
+        idvoucher: "",
+        catatan: formDescription,
+      };
+      const dataForHistory = {
+        nama: formName,
+        status: "unpaid",
+        idvoucher: "",
+        catatan: formDescription,
+        orders: orderList,
+      };
+      const { data, error } = await supabase
+        .from("orderheader")
+        .upsert(dataInsert)
+        .select();
+
+      console.log(data);
+
+      if (orderList && data != null) {
+        const updatedOrderList = orderList.map((item) => ({
+          ...item,
+          idheader: data[0].id,
+        }));
+
+        await supabase.from("orderdetail").upsert(updatedOrderList);
+
+        if (hasLocalStorageItem("orderHistory")) {
+          const retrievedHistory = localStorage.getItem("orderHistory");
+          if (retrievedHistory) {
+            const parsedHistory = JSON.parse(retrievedHistory);
+            parsedHistory.push(dataForHistory);
+            localStorage.setItem("orderHistory", JSON.stringify(parsedHistory));
+          }
+        } else {
+          localStorage.setItem(
+            "orderHistory",
+            JSON.stringify([dataForHistory])
+          );
+        }
+
+        localStorage.removeItem("order");
+        ToastSuccess("Berhasil membuat pesanan!");
+        setIsCheckout(false);
+        setIsSuccess(true);
+        setOrderList([]);
+        setFormDescription("");
+        setFormName("");
+        onClose();
+      } else {
+        ToastError("Gagal membuat pesanan");
+      }
+
+      // router.push("/");
+    } catch (error) {
+      ToastError(error.message);
+    }
+  };
+
   return (
     <>
       {/* dialog 1 for orderlist */}
@@ -131,9 +202,18 @@ export default function OrderList({
                 <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                   <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
                     <div className="flex items-start justify-between">
-                      <DialogTitle className="text-lg font-bold text-gray-900">
-                        Daftar Pesanan
-                      </DialogTitle>
+                      <div className="flex flex-row gap-4">
+                        <DialogTitle className="text-lg font-bold text-gray-900">
+                          Daftar Pesanan
+                        </DialogTitle>
+                        <button
+                          className="p-2 rounded-lg text-white bg-red-500"
+                          type="button"
+                          onClick={() => setIsResetOrder(true)}
+                        >
+                          <ArrowPathIcon width={12} height={12} />
+                        </button>
+                      </div>
                       <div className="ml-3 flex h-7 items-center">
                         <button
                           type="button"
@@ -232,9 +312,16 @@ export default function OrderList({
                     </p>
                     <div className="mt-6 flex flex-col items-center justify-center">
                       <button
+                        disabled={
+                          orderList
+                            ? orderList.length == 0
+                              ? true
+                              : false
+                            : true
+                        }
                         type="button"
                         onClick={() => setIsCheckout(true)}
-                        className="w-full rounded-md border border-transparent bg-sarkara-sign-1 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-sarkara-sign"
+                        className="w-full rounded-md border border-transparent bg-sarkara-sign-1 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-sarkara-sign disabled:bg-gray-400"
                       >
                         Pesan Sekarang!
                       </button>
@@ -382,7 +469,8 @@ export default function OrderList({
                           htmlFor="formName"
                           className="block text-sm/6 font-medium text-gray-900"
                         >
-                          Nama Pelanggan
+                          Nama Pelanggan (
+                          <span className="text-red-600">*</span>)
                         </label>
                         <div className="mt-2">
                           <input
@@ -423,10 +511,9 @@ export default function OrderList({
                         className="mt-6"
                       >
                         <button
-                          className="bg-sarkara-sign-1 w-full py-3 rounded-lg text-white font-bold"
-                          onClick={() =>
-                            console.log(process.env.NEXT_PUBLIC_TES)
-                          }
+                          disabled={formName === "" ? true : false}
+                          className={`bg-sarkara-sign-1 w-full py-3 rounded-lg text-white font-bold disabled:bg-gray-400`}
+                          onClick={() => handleCreate()}
                         >
                           Konfirmasi Pesanan
                         </button>
@@ -435,6 +522,129 @@ export default function OrderList({
                     </div>
                   </div>
                 </div>
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
+
+      {/* success dialog */}
+      <Dialog
+        open={isSuccess}
+        onClose={() => setIsSuccess(false)}
+        className="relative z-10"
+      >
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+        />
+
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <DialogPanel
+              transition
+              className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            >
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:size-10">
+                    <CheckBadgeIcon
+                      aria-hidden="true"
+                      className="size-6 text-green-500"
+                    />
+                  </div>
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <DialogTitle
+                      as="h3"
+                      className="text-base font-semibold text-gray-900"
+                    >
+                      Pesanan Berhasil Dibuat!
+                    </DialogTitle>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Silahkan pergi ke kasir untuk menyelesaikan pembayaran
+                        dan mengambil pesanan!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button
+                  type="button"
+                  onClick={() => setIsSuccess(false)}
+                  className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 sm:ml-3 sm:w-auto"
+                >
+                  Oke, Siap!
+                </button>
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
+
+      {/* reset order dialog */}
+      <Dialog
+        open={isResetOrder}
+        onClose={() => setIsResetOrder(false)}
+        className="relative z-10"
+      >
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+        />
+
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <DialogPanel
+              transition
+              className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            >
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
+                    <ExclamationTriangleIcon
+                      aria-hidden="true"
+                      className="size-6 text-red-600"
+                    />
+                  </div>
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <DialogTitle
+                      as="h3"
+                      className="text-base font-semibold text-gray-900"
+                    >
+                      Hapus Semua Pesanan
+                    </DialogTitle>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Apakah Anda yakin ingin menghapus semua pesanan? Aksi
+                        ini tidak dapat dipulihkan.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsResetOrder(false);
+                    setOrderList([]);
+                    localStorage.removeItem("order");
+                    // onClose();
+                  }}
+                  className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                >
+                  Yakin!
+                </button>
+                <button
+                  type="button"
+                  data-autofocus
+                  onClick={() => setIsResetOrder(false)}
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                >
+                  Batalkan
+                </button>
               </div>
             </DialogPanel>
           </div>
