@@ -59,6 +59,8 @@ export default function OrderList({
 }) {
   const [orderList, setOrderList] = useState<order[]>();
   const [isCheckout, setIsCheckout] = useState(false);
+  const [formDescription, setFormDescription] = useState("");
+  const [formName, setFormName] = useState("");
 
   function hasLocalStorageItem(key: string) {
     return localStorage.getItem(key) !== null;
@@ -324,7 +326,7 @@ export default function OrderList({
                                   </p>
                                 </div>
 
-                                <p className="ml-4 font-bold text-xs">
+                                <p className="ml-4 text-xs">
                                   {formatToIDR(product.harga * product.jumlah)}
                                 </p>
                               </div>
@@ -332,55 +334,104 @@ export default function OrderList({
                           ))}
                         </ul>
                       )}
-                      <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Subtotal</p>
-                        {orderList
-                          ? formatToIDR(
-                              orderList.reduce((total, item) => {
-                                return total + item.harga * item.jumlah;
-                              }, 0)
-                            )
-                          : formatToIDR(0)}
+                      <div className="flex justify-between text-base font-medium text-gray-900 border-t border-gray-300 pt-4 mt-4">
+                        <p className="text-xs font-bold">Subtotal</p>
+                        <p className="text-xs">
+                          {orderList
+                            ? formatToIDR(
+                                orderList.reduce((total, item) => {
+                                  return total + item.harga * item.jumlah;
+                                }, 0)
+                              )
+                            : formatToIDR(0)}
+                        </p>
+                      </div>
+                      <div className="flex justify-between text-base text-gray-400 mt-2">
+                        <p className="text-xs">PPN (12% * 11/12)</p>
+                        <p className="text-xs">
+                          {orderList
+                            ? formatToIDR(
+                                0.11 *
+                                  orderList.reduce((total, item) => {
+                                    return total + item.harga * item.jumlah;
+                                  }, 0)
+                              )
+                            : formatToIDR(0)}
+                        </p>
+                      </div>
+                      <div className="flex justify-between text-base font-medium text-gray-900 border-t border-gray-300 pt-4 mt-4">
+                        <p className="text-xs font-bold">Grand Total</p>
+                        <p className="text-xs font-bold">
+                          {orderList
+                            ? formatToIDR(
+                                0.11 *
+                                  orderList.reduce((total, item) => {
+                                    return total + item.harga * item.jumlah;
+                                  }, 0) +
+                                  orderList.reduce((total, item) => {
+                                    return total + item.harga * item.jumlah;
+                                  }, 0)
+                              )
+                            : formatToIDR(0)}
+                        </p>
                       </div>
                     </div>
                     <div className="col-span-full lg:col-span-3">
                       <div className="mt-2">
                         <label
-                          htmlFor="about"
+                          htmlFor="formName"
                           className="block text-sm/6 font-medium text-gray-900"
                         >
                           Nama Pelanggan
                         </label>
                         <div className="mt-2">
                           <input
-                            id="about"
-                            name="about"
+                            id="formName"
+                            name="formName"
                             type="text"
                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            defaultValue={""}
+                            value={formName}
+                            onChange={(e) => {
+                              setFormName(e.target.value);
+                            }}
                           />
                         </div>
                       </div>
                       <div className="mt-4">
                         <label
-                          htmlFor="about"
+                          htmlFor="note"
                           className="block text-sm/6 font-medium text-gray-900"
                         >
                           Catatan
                         </label>
                         <div className="mt-2">
                           <textarea
-                            id="about"
-                            name="about"
+                            id="note"
+                            name="note"
                             rows={3}
                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                            defaultValue={""}
+                            value={formDescription}
+                            onChange={(e) => setFormDescription(e.target.value)}
                           />
                         </div>
                         <p className="mt-3 text-sm/6 text-gray-600">
                           Kasi catatan untuk menu yang kamu pesan.
                         </p>
                       </div>
+                      <section
+                        aria-labelledby="order confirmation"
+                        className="mt-6"
+                      >
+                        <button
+                          className="bg-sarkara-sign-1 w-full py-3 rounded-lg text-white font-bold"
+                          onClick={() =>
+                            console.log(process.env.NEXT_PUBLIC_TES)
+                          }
+                        >
+                          Konfirmasi Pesanan
+                        </button>
+                        {/* Sizes */}
+                      </section>
                     </div>
                   </div>
                 </div>
