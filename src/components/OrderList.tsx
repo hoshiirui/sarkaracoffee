@@ -69,6 +69,7 @@ export default function OrderList({
   const [formName, setFormName] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const [isResetOrder, setIsResetOrder] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   function hasLocalStorageItem(key: string) {
     return localStorage.getItem(key) !== null;
@@ -115,6 +116,7 @@ export default function OrderList({
   };
 
   const handleCreate = async () => {
+    setIsLoading(true);
     const supabase = createClient();
     try {
       const dataInsert = {
@@ -161,6 +163,7 @@ export default function OrderList({
 
         localStorage.removeItem("order");
         ToastSuccess("Berhasil membuat pesanan!");
+        setIsLoading(false);
         setIsCheckout(false);
         setIsSuccess(true);
         setOrderList([]);
@@ -242,8 +245,8 @@ export default function OrderList({
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {orderList.map((product) => (
-                              <li key={product.idproduk} className="flex py-6">
+                            {orderList.map((product, index: number) => (
+                              <li key={index} className="flex py-6">
                                 <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
                                     alt={product.namaproduk}
@@ -401,12 +404,17 @@ export default function OrderList({
                         <p>Belum ada order apapun</p>
                       ) : (
                         <ul role="list" className="my-2">
-                          {orderList.map((product) => (
-                            <li key={product.idproduk} className="flex mb-1">
+                          {orderList.map((product, index: number) => (
+                            <li key={index} className="flex mb-1">
                               <div className="flex flex-1 items-start justify-between text-sm">
                                 <div className="flex flex-col">
                                   <p className="text-xs text-gray-700 capitalize">
-                                    {product.namaproduk}
+                                    {product.namaproduk}{" "}
+                                    {product.penyajian === "dingin"
+                                      ? "(Ice)"
+                                      : product.penyajian === "panas"
+                                      ? "(Hot)"
+                                      : null}
                                   </p>
                                   <p className="text-xs mb-1 text-gray-400">
                                     {" (" +
@@ -515,7 +523,7 @@ export default function OrderList({
                         className="mt-6"
                       >
                         <button
-                          disabled={formName === "" ? true : false}
+                          disabled={formName === "" ? true : false || isLoading}
                           className={`bg-sarkara-sign-1 w-full py-3 rounded-lg text-white font-bold disabled:bg-gray-400`}
                           onClick={() => handleCreate()}
                         >

@@ -81,7 +81,9 @@ export default function ProductModal({
       if (retrievedJson) {
         const existingOrder = JSON.parse(retrievedJson);
         const existingItemIndex = existingOrder.findIndex(
-          (item: any) => item.idproduk === newOrder.idproduk
+          (item: any) =>
+            item.idproduk === newOrder.idproduk &&
+            item.penyajian === newOrder.penyajian
         );
 
         if (existingItemIndex !== -1) {
