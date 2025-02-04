@@ -250,7 +250,7 @@ export default function OrderList({
                                 <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
                                     alt={product.namaproduk}
-                                    src={`images/products/${product.tipemenu}/${product.imagehref}`}
+                                    src={`https://nqzspgzcbmwdwnzdhbrl.supabase.co/storage/v1/object/public/menuimages//${product.imagehref}`}
                                     className="size-full object-cover"
                                   />
                                 </div>
