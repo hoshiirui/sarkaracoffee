@@ -180,13 +180,7 @@ export default function OrderList({
         idvoucher: localStorage.getItem("promoTerpilih"),
         catatan: formDescription,
       };
-      const dataForHistory = {
-        nama: formName,
-        status: "unpaid",
-        idvoucher: localStorage.getItem("promoTerpilih"),
-        catatan: formDescription,
-        orders: orderList,
-      };
+
       const { data, error } = await supabase
         .from("orderheader")
         .upsert(dataInsert)
@@ -209,6 +203,15 @@ export default function OrderList({
 
         await supabase.from("orderdetail").upsert(updatedOrderList);
 
+        const dataForHistory = {
+          nama: formName,
+          status: "unpaid",
+          idvoucher: localStorage.getItem("promoTerpilih"),
+          catatan: formDescription,
+          orders: orderList,
+          id: data[0].id,
+          created_at: new Date().toISOString(),
+        };
         if (hasLocalStorageItem("orderHistory")) {
           const retrievedHistory = localStorage.getItem("orderHistory");
           if (retrievedHistory) {
