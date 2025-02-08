@@ -16,6 +16,7 @@ import { ToastError, ToastSuccess } from "@/helper/Toast";
 import { formatToIDR } from "@/helper/idrFormatter";
 import { createClient } from "@/helper/supabase/client";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
+import { PromoWithMenu } from "@/types/Promo";
 
 interface order {
   idproduk: number;
@@ -26,14 +27,17 @@ interface order {
   varian: string;
   penyajian: string;
   tipemenu: string;
+  discounted: string;
 }
 
 export default function OrderList({
   isVisible,
   onClose,
+  promoAvailable,
 }: {
   isVisible: boolean;
   onClose: () => void;
+  promoAvailable: PromoWithMenu[];
 }) {
   const [orderList, setOrderList] = useState<order[]>();
   const [isCheckout, setIsCheckout] = useState(false);
@@ -42,15 +46,62 @@ export default function OrderList({
   const [isSuccess, setIsSuccess] = useState(false);
   const [isResetOrder, setIsResetOrder] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
+
+  const initialPromoTerpilih = () => {
+    const promoExists = hasLocalStorageItem("promoTerpilih");
+    if (promoExists) {
+      console.log("Promo: ", localStorage.getItem("promoTerpilih"));
+      return localStorage.getItem("promoTerpilih");
+    } else {
+      return "";
+    }
+  };
+
+  const [promoTerpilih, setPromoTerpilih] = useState<any>(initialPromoTerpilih);
+
+  const pricePromoSync = (idPromo: string) => {
+    const choosenPromo = promoAvailable.find((promo) => promo.id === idPromo);
+
+    const menuExist = hasLocalStorageItem("order");
+
+    if (menuExist && choosenPromo) {
+      const retrievedJson = localStorage.getItem("order");
+
+      if (retrievedJson) {
+        const existingOrder = JSON.parse(retrievedJson);
+        console.log(choosenPromo);
+        console.log(existingOrder);
+
+        const updatedOrder = existingOrder.map((item: order) => {
+          if (
+            choosenPromo.menuB &&
+            choosenPromo.menuB.includes(item.idproduk.toString())
+          ) {
+            console.log(item);
+            return { ...item, harga: 1000, discounted: "yes" };
+          }
+          console.log(item.idproduk);
+          return item;
+        });
+
+        localStorage.setItem("order", JSON.stringify(updatedOrder));
+      }
+    }
+  };
 
   function hasLocalStorageItem(key: string) {
     return localStorage.getItem(key) !== null;
   }
 
+  const changeTextColor = () => {
+    setIsOptionSelected(true);
+  };
+
   useEffect(() => {
     handleLoadProduct();
     console.log(orderList);
-  }, [isVisible]);
+  }, [isVisible, promoTerpilih]);
 
   const deleteMenu = (
     idmenu: number,
@@ -276,6 +327,38 @@ export default function OrderList({
                   </div>
 
                   <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <div className=" text-base font-medium text-gray-900">
+                      <p>Pilih Promo</p>
+                    </div>
+                    <select
+                      name="role"
+                      value={promoTerpilih}
+                      onChange={(e) => {
+                        setPromoTerpilih(e.target.value);
+                        localStorage.setItem("promoTerpilih", e.target.value);
+                        pricePromoSync(e.target.value);
+                        changeTextColor();
+                      }}
+                      className={`relative z-20 mb-4 mt-0.5 w-full appearance-none rounded border border-stroke bg-transparent px-2 py-1 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input ${
+                        isOptionSelected
+                          ? "dark:border-form-strokedark dark:text-white"
+                          : ""
+                      }`}
+                    >
+                      <option value="" className="text-body dark:text-bodydark">
+                        Tidak Ada
+                      </option>
+                      {promoAvailable.map((promo) => (
+                        <option
+                          value={promo.id}
+                          className="text-body dark:text-bodydark"
+                          key={promo.id}
+                        >
+                          {promo.title}
+                        </option>
+                      ))}
+                    </select>
+
                     <div className="flex justify-between text-base font-medium text-gray-900">
                       <p>Subtotal</p>
                       {orderList

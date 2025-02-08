@@ -109,7 +109,7 @@ export default function PromoPage() {
 
         const updatedPromos = data.map((promo) => ({
           ...promo,
-          menuB: promo.menuB
+          menuBerlaku: promo.menuB
             ? promo.menuB.map((menuId: any) => menuMap.get(menuId))
             : null,
         }));

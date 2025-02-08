@@ -64,6 +64,8 @@ export default function ProductModal({
   const handleAddProduct = () => {
     const orderExists = hasLocalStorageItem("order");
 
+    const promoExists = hasLocalStorageItem("promoTerpilih");
+
     const newOrder = {
       idproduk: product.id,
       namaproduk: product.name,
@@ -73,7 +75,12 @@ export default function ProductModal({
       varian: variantChoice,
       penyajian: pilihanSelected,
       tipemenu: product.menuType,
+      discounted: "no",
     };
+
+    if (!promoExists) {
+      localStorage.setItem("promoTerpilih", "");
+    }
 
     if (orderExists) {
       const retrievedJson = localStorage.getItem("order");

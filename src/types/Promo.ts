@@ -24,10 +24,11 @@ export interface PromoWithMenu {
   date: string;
   category: string;
   minTrans?: number;
-  menuB?: MenuSarkara[];
+  menuB?: string[];
   caraP?: string;
   syaratK: string;
   discType?: string;
   discAmount?: number;
   imageHref: string;
+  menuBerlaku: MenuSarkara[];
 }

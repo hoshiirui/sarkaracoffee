@@ -31,6 +31,7 @@ import ProductModal from "@/components/ProductModal";
 import OrderList from "@/components/OrderList";
 import { createClient } from "@/helper/supabase/client";
 import { ToastError } from "@/helper/Toast";
+import { PromoWithMenu } from "@/types/Promo";
 
 const sortOptions = [
   { name: "Kategori" },
@@ -92,6 +93,8 @@ export default function SarkaraMenu() {
   const [activeSort, setActiveSort] = useState("Kategori");
   const [showOrderList, setShowOrderList] = useState(false);
 
+  const [promoList, setPromoList] = useState<PromoWithMenu[]>([]);
+
   const fetchData = async () => {
     setIsLoading(true);
     const supabase = createClient();
@@ -101,12 +104,29 @@ export default function SarkaraMenu() {
         .from("menu")
         .select("*")
         .order("created_at", { ascending: false });
+      const { data: dataPromo, error: errorPromo } = await supabase
+        .from("promo")
+        .select(`*`)
+        .order("created_at", { ascending: false });
       if (error) {
         console.error("Error fetching data:", error.message);
+      } else if (errorPromo) {
+        console.error("Error fetching data:", errorPromo.message);
       } else {
         setDefaultProducts(data);
         setSelectedProducts(data);
         console.log(data);
+
+        const menuMap = new Map(data.map((menu) => [menu.id, menu]));
+
+        const updatedPromos = dataPromo.map((promo) => ({
+          ...promo,
+          menuBerlaku: promo.menuB
+            ? promo.menuB.map((menuId: any) => menuMap.get(menuId))
+            : null,
+        }));
+
+        setPromoList(updatedPromos);
         setIsLoading(false);
       }
     } catch (error) {
@@ -610,6 +630,7 @@ export default function SarkaraMenu() {
       <OrderList
         isVisible={showOrderList}
         onClose={() => setShowOrderList(false)}
+        promoAvailable={promoList}
       />
       <Footer />
     </div>
