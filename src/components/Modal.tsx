@@ -22,6 +22,8 @@ import { formatToIDR } from "@/helper/idrFormatter";
 import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import { Promo, PromoWithMenu } from "@/types/Promo";
 import Image from "next/image";
+import { ToastSuccess } from "@/helper/Toast";
+import { useRouter } from "next/navigation";
 
 export default function Modal({
   isVisible,
@@ -35,11 +37,19 @@ export default function Modal({
   const [caraP, setCaraP] = useState(false);
   const [syarat, setSyarat] = useState(false);
   const [menuB, setMenuB] = useState(false);
+  const router = useRouter();
 
   const handleClose = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     // setSyarat(false);
     // setMenuB(false);
     // setCaraP(false);
+  };
+
+  const handleUsePromo = (idPromo: string, namaPromo: string) => {
+    localStorage.setItem("promoTerpilih", idPromo);
+    onClose();
+    ToastSuccess(`Berhasil menggunakan promo ${namaPromo}!`);
+    router.push("/menu");
   };
 
   return (
@@ -260,6 +270,19 @@ export default function Modal({
                       </div>
                     </div>
 
+                    {/* Sizes */}
+                  </section>
+                  <section
+                    aria-labelledby="syarat-dan-ketentuan"
+                    className="mt-6"
+                  >
+                    {/* Cara penggunaan */}
+                    <button
+                      className="bg-sarkara-sign-1 w-full py-3 rounded-full text-white font-bold hover:bg-sarkara-sign"
+                      onClick={() => handleUsePromo(product.id, product.title)}
+                    >
+                      Gunakan Promo
+                    </button>
                     {/* Sizes */}
                   </section>
                 </div>

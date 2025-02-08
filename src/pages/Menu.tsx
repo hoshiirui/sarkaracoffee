@@ -625,6 +625,7 @@ export default function SarkaraMenu() {
           isVisible={showMenuModal}
           onClose={() => setShowMenuModal(false)}
           product={selectedMenu}
+          promoAvailable={promoList}
         />
       )}
       <OrderList

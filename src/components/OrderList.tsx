@@ -27,7 +27,8 @@ interface order {
   varian: string;
   penyajian: string;
   tipemenu: string;
-  discounted: string;
+  discounted: boolean;
+  discounted_price: number | null;
 }
 
 export default function OrderList({
@@ -65,27 +66,45 @@ export default function OrderList({
 
     const menuExist = hasLocalStorageItem("order");
 
-    if (menuExist && choosenPromo) {
+    if (menuExist) {
       const retrievedJson = localStorage.getItem("order");
 
       if (retrievedJson) {
-        const existingOrder = JSON.parse(retrievedJson);
-        console.log(choosenPromo);
-        console.log(existingOrder);
+        const existingOrder = JSON.parse(retrievedJson).map((item: order) => ({
+          ...item,
+          discounted: false,
+          discounted_price: null,
+        }));
+        // console.log(choosenPromo);
+        // console.log(existingOrder);
 
-        const updatedOrder = existingOrder.map((item: order) => {
-          if (
-            choosenPromo.menuB &&
-            choosenPromo.menuB.includes(item.idproduk.toString())
-          ) {
-            console.log(item);
-            return { ...item, harga: 1000, discounted: "yes" };
-          }
-          console.log(item.idproduk);
-          return item;
-        });
+        if (choosenPromo && choosenPromo.category === "Discount") {
+          const updatedOrder = existingOrder.map((item: order) => {
+            if (
+              choosenPromo.menuB &&
+              choosenPromo.menuB.includes(item.idproduk.toString())
+            ) {
+              console.log(item);
+              if (choosenPromo.discAmount) {
+                return {
+                  ...item,
+                  discounted_price:
+                    choosenPromo.discType === "percentage"
+                      ? item.harga -
+                        (item.harga * choosenPromo.discAmount) / 100
+                      : item.harga - choosenPromo.discAmount,
+                  discounted: true,
+                };
+              }
+            }
+            console.log(item.idproduk);
+            return item;
+          });
 
-        localStorage.setItem("order", JSON.stringify(updatedOrder));
+          localStorage.setItem("order", JSON.stringify(updatedOrder));
+        } else {
+          localStorage.setItem("order", JSON.stringify(existingOrder));
+        }
       }
     }
   };
@@ -99,6 +118,15 @@ export default function OrderList({
   };
 
   useEffect(() => {
+    const promoId = localStorage.getItem("promoTerpilih");
+    console.log("use effect jalan", promoId);
+
+    if (promoId) {
+      pricePromoSync(promoId);
+    } else {
+      pricePromoSync("");
+      console.log("lalalal");
+    }
     handleLoadProduct();
     console.log(orderList);
   }, [isVisible, promoTerpilih]);
@@ -145,13 +173,13 @@ export default function OrderList({
       const dataInsert = {
         nama: formName,
         status: "unpaid",
-        idvoucher: "",
+        idvoucher: localStorage.getItem("promoTerpilih"),
         catatan: formDescription,
       };
       const dataForHistory = {
         nama: formName,
         status: "unpaid",
-        idvoucher: "",
+        idvoucher: localStorage.getItem("promoTerpilih"),
         catatan: formDescription,
         orders: orderList,
       };
@@ -164,8 +192,15 @@ export default function OrderList({
 
       if (orderList && data != null) {
         const updatedOrderList = orderList.map((item) => ({
-          ...item,
+          idproduk: item.idproduk,
+          namaproduk: item.namaproduk,
+          imagehref: item.imagehref,
+          jumlah: item.jumlah,
+          varian: item.varian,
+          penyajian: item.penyajian,
+          tipemenu: item.tipemenu,
           idheader: data[0].id,
+          harga: item.discounted_price ? item.discounted_price : item.harga,
         }));
 
         await supabase.from("orderdetail").upsert(updatedOrderList);
@@ -186,6 +221,7 @@ export default function OrderList({
 
         localStorage.removeItem("order");
         ToastSuccess("Berhasil membuat pesanan!");
+        localStorage.setItem("promoTerpilih", "");
         setIsLoading(false);
         setIsCheckout(false);
         setIsSuccess(true);
@@ -297,8 +333,18 @@ export default function OrderList({
                                         Hapus
                                       </button>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500 capitalize">
-                                      {formatToIDR(product.harga) +
+                                    <p
+                                      className={`mt-1 text-sm ${
+                                        product.discounted
+                                          ? "text-red-600"
+                                          : "text-gray-500"
+                                      } capitalize`}
+                                    >
+                                      {formatToIDR(
+                                        product.discounted_price
+                                          ? product.discounted_price
+                                          : product.harga
+                                      ) +
                                         " - " +
                                         product.penyajian}
                                     </p>
@@ -312,7 +358,10 @@ export default function OrderList({
                                       <p className="ml-4 font-bold">
                                         {"Total: " +
                                           formatToIDR(
-                                            product.harga * product.jumlah
+                                            product.discounted_price
+                                              ? product.discounted_price *
+                                                  product.jumlah
+                                              : product.harga * product.jumlah
                                           )}
                                       </p>
                                     </div>
@@ -364,7 +413,13 @@ export default function OrderList({
                       {orderList
                         ? formatToIDR(
                             orderList.reduce((total, item) => {
-                              return total + item.harga * item.jumlah;
+                              return (
+                                total +
+                                (item.discounted_price
+                                  ? item.discounted_price
+                                  : item.harga) *
+                                  item.jumlah
+                              );
                             }, 0)
                           )
                         : formatToIDR(0)}
@@ -475,13 +530,21 @@ export default function OrderList({
                                     {" (" +
                                       product.jumlah +
                                       " x " +
-                                      formatToIDR(product.harga) +
+                                      formatToIDR(
+                                        product.discounted_price
+                                          ? product.discounted_price
+                                          : product.harga
+                                      ) +
                                       ")"}
                                   </p>
                                 </div>
 
                                 <p className="ml-4 text-xs">
-                                  {formatToIDR(product.harga * product.jumlah)}
+                                  {formatToIDR(
+                                    (product.discounted_price
+                                      ? product.discounted_price
+                                      : product.harga) * product.jumlah
+                                  )}
                                 </p>
                               </div>
                             </li>
@@ -494,7 +557,13 @@ export default function OrderList({
                           {orderList
                             ? formatToIDR(
                                 orderList.reduce((total, item) => {
-                                  return total + item.harga * item.jumlah;
+                                  return (
+                                    total +
+                                    (item.discounted_price
+                                      ? item.discounted_price
+                                      : item.harga) *
+                                      item.jumlah
+                                  );
                                 }, 0)
                               )
                             : formatToIDR(0)}
@@ -507,7 +576,13 @@ export default function OrderList({
                             ? formatToIDR(
                                 0.11 *
                                   orderList.reduce((total, item) => {
-                                    return total + item.harga * item.jumlah;
+                                    return (
+                                      total +
+                                      (item.discounted_price
+                                        ? item.discounted_price
+                                        : item.harga) *
+                                        item.jumlah
+                                    );
                                   }, 0)
                               )
                             : formatToIDR(0)}
@@ -520,10 +595,22 @@ export default function OrderList({
                             ? formatToIDR(
                                 0.11 *
                                   orderList.reduce((total, item) => {
-                                    return total + item.harga * item.jumlah;
+                                    return (
+                                      total +
+                                      (item.discounted_price
+                                        ? item.discounted_price
+                                        : item.harga) *
+                                        item.jumlah
+                                    );
                                   }, 0) +
                                   orderList.reduce((total, item) => {
-                                    return total + item.harga * item.jumlah;
+                                    return (
+                                      total +
+                                      (item.discounted_price
+                                        ? item.discounted_price
+                                        : item.harga) *
+                                        item.jumlah
+                                    );
                                   }, 0)
                               )
                             : formatToIDR(0)}

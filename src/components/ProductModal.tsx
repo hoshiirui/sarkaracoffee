@@ -22,20 +22,47 @@ import { formatToIDR } from "@/helper/idrFormatter";
 import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import { MenuSarkara } from "@/types/MenuSarkara";
 import { ToastError, ToastSuccess } from "@/helper/Toast";
+import { PromoWithMenu } from "@/types/Promo";
+
+interface order {
+  idproduk: number;
+  namaproduk: string;
+  harga: number;
+  imagehref: string;
+  jumlah: number;
+  varian: string;
+  penyajian: string;
+  tipemenu: string;
+  discounted: boolean;
+  discounted_price: number | null;
+}
 
 export default function ProductModal({
   isVisible,
   onClose,
   product,
+  promoAvailable,
 }: {
   isVisible: boolean;
   onClose: () => void;
   product: MenuSarkara;
+  promoAvailable: PromoWithMenu[];
 }) {
   const [pilihanSelected, setPilihanSelected] = useState("");
   const [variantChoice, setVariantChoice] = useState("");
   const [priceAdd, setPriceAdd] = useState(0);
   const [amount, setAmount] = useState(1);
+  const initialPromoTerpilih = () => {
+    const promoExists = hasLocalStorageItem("promoTerpilih");
+    if (promoExists) {
+      console.log("Promo: ", localStorage.getItem("promoTerpilih"));
+      return localStorage.getItem("promoTerpilih");
+    } else {
+      return "";
+    }
+  };
+
+  const [promoTerpilih, setPromoTerpilih] = useState<any>(initialPromoTerpilih);
 
   useEffect(() => {
     setPilihanSelected(
@@ -66,7 +93,7 @@ export default function ProductModal({
 
     const promoExists = hasLocalStorageItem("promoTerpilih");
 
-    const newOrder = {
+    const newOrder: order = {
       idproduk: product.id,
       namaproduk: product.name,
       harga: product.price + priceAdd,
@@ -75,7 +102,8 @@ export default function ProductModal({
       varian: variantChoice,
       penyajian: pilihanSelected,
       tipemenu: product.menuType,
-      discounted: "no",
+      discounted: false,
+      discounted_price: null,
     };
 
     if (!promoExists) {
@@ -98,7 +126,32 @@ export default function ProductModal({
           existingOrder[existingItemIndex].jumlah += newOrder.jumlah;
         } else {
           // Item doesn't exist, add new item
-          existingOrder.push(newOrder);
+          const choosenPromo = promoAvailable.find(
+            (promo) => promo.id === localStorage.getItem("promoTerpilih")
+          );
+
+          if (choosenPromo && choosenPromo.category === "Discount") {
+            const updatedOrder = {
+              ...newOrder,
+            };
+
+            if (
+              choosenPromo.menuB &&
+              choosenPromo.menuB.includes(newOrder.idproduk.toString()) &&
+              choosenPromo.discAmount
+            ) {
+              updatedOrder.discounted_price =
+                choosenPromo.discType === "percentage"
+                  ? newOrder.harga -
+                    (newOrder.harga * choosenPromo.discAmount) / 100
+                  : newOrder.harga - choosenPromo.discAmount;
+              updatedOrder.discounted = true;
+            }
+
+            existingOrder.push(updatedOrder);
+          } else {
+            existingOrder.push(newOrder);
+          }
         }
 
         // Store the updated array back in localStorage
@@ -315,7 +368,7 @@ export default function ProductModal({
                   >
                     {/* Cara penggunaan */}
                     <button
-                      className="bg-sarkara-sign-1 w-full py-3 rounded-full text-white font-bold"
+                      className="bg-sarkara-sign-1 hover:bg-sarkara-sign w-full py-3 rounded-full text-white font-bold"
                       onClick={handleAddProduct}
                     >
                       Harga Total ・ {formatToIDR(product.price + priceAdd)}
