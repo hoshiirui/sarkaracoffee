@@ -20,33 +20,8 @@ import { Clock } from "lucide-react";
 import { ClockIcon } from "@heroicons/react/24/solid";
 import { formatToIDR } from "@/helper/idrFormatter";
 import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
-import { Promo } from "@/types/Promo";
-
-// const product = {
-//   name: "Diskon 35% Menu Kategori Non-Coffee",
-//   price: "$192",
-//   rating: 3.9,
-//   reviewCount: 117,
-//   href: "#",
-//   imageSrc:
-//     "https://tailwindui.com/plus/img/ecommerce-images/product-quick-preview-02-detail.jpg",
-//   imageAlt: "Two each of gray, white, and black shirts arranged on table.",
-//   colors: [
-//     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-//     { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-//     { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-//   ],
-//   sizes: [
-//     { name: "XXS", inStock: true },
-//     { name: "XS", inStock: true },
-//     { name: "S", inStock: true },
-//     { name: "M", inStock: true },
-//     { name: "L", inStock: true },
-//     { name: "XL", inStock: true },
-//     { name: "XXL", inStock: true },
-//     { name: "XXXL", inStock: false },
-//   ],
-// };
+import { Promo, PromoWithMenu } from "@/types/Promo";
+import Image from "next/image";
 
 export default function Modal({
   isVisible,
@@ -55,7 +30,7 @@ export default function Modal({
 }: {
   isVisible: boolean;
   onClose: () => void;
-  product: Promo;
+  product: PromoWithMenu;
 }) {
   const [caraP, setCaraP] = useState(false);
   const [syarat, setSyarat] = useState(false);
@@ -106,9 +81,11 @@ export default function Modal({
               </button>
 
               <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
-                <img
+                <Image
                   alt={`diskon`}
-                  src={`/images/promo/v/${product.id}.jpg`}
+                  width={182}
+                  height={272}
+                  src={`${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/promoimages_v//${product.imageHref}`}
                   className="aspect-[2/3] w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5"
                 />
                 <div className="sm:col-span-8 lg:col-span-7">
@@ -267,7 +244,16 @@ export default function Modal({
                         {menuB && (
                           <p className="text-sm font-medium text-gray-900 text-justify mt-2">
                             {product.menuB
-                              ? product.menuB
+                              ? product.menuB.map((menu, index) => (
+                                  <span key={menu.id}>
+                                    {menu.name}
+                                    {index <
+                                      (product.menuB
+                                        ? product.menuB.length
+                                        : 0) -
+                                        1 && ", "}
+                                  </span>
+                                ))
                               : "Semua menu selama syarat promo terpenuhi"}
                           </p>
                         )}

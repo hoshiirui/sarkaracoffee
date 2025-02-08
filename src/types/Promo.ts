@@ -1,15 +1,33 @@
+import { MenuSarkara } from "./MenuSarkara";
+
 export interface Promo {
-  id: number;
+  id: string;
+  created_at: string;
   title: string;
   description: string;
-  caraP?: string;
-  syaratK?: string;
-  menuB?: string;
   date: string;
-  datetime: string;
+  category: string;
   minTrans?: number;
-  category: {
-    title: string;
-    href: string;
-  };
+  menuB?: string[];
+  caraP?: string;
+  syaratK: string;
+  discType?: string;
+  discAmount?: number;
+  imageHref: string;
+}
+
+export interface PromoWithMenu {
+  id: string;
+  created_at: string;
+  title: string;
+  description: string;
+  date: string;
+  category: string;
+  minTrans?: number;
+  menuB?: MenuSarkara[];
+  caraP?: string;
+  syaratK: string;
+  discType?: string;
+  discAmount?: number;
+  imageHref: string;
 }
