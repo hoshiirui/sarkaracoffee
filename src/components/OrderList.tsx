@@ -50,10 +50,14 @@ export default function OrderList({
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
 
   const initialPromoTerpilih = () => {
-    const promoExists = hasLocalStorageItem("promoTerpilih");
-    if (promoExists) {
-      console.log("Promo: ", localStorage.getItem("promoTerpilih"));
-      return localStorage.getItem("promoTerpilih");
+    if (typeof window !== "undefined") {
+      const promoExists = hasLocalStorageItem("promoTerpilih");
+      if (promoExists) {
+        console.log("Promo: ", localStorage.getItem("promoTerpilih"));
+        return localStorage.getItem("promoTerpilih");
+      } else {
+        return "";
+      }
     } else {
       return "";
     }
