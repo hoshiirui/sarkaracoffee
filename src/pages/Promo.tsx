@@ -134,7 +134,7 @@ export default function PromoPage() {
     <div className="bg-white min-h-screen">
       <>
         <Header active="Promo" />
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-36 pt-36">
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-36 pt-36 min-h-screen">
           <div className="flex flex-col items-center">
             <div className="mx-auto max-w-2xl lg:mx-0 flex flex-col items-center">
               <h2 className="text-base/7 font-semibold text-sarkara-sign-1">

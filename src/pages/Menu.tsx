@@ -206,7 +206,7 @@ export default function SarkaraMenu() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white min-h-screen">
       <Header active="Menu" />
       <div>
         {/* Mobile filter dialog */}

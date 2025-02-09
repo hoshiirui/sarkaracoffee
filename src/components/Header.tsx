@@ -7,7 +7,7 @@ const navigation = [
   { name: "Beranda", href: "/" },
   { name: "Menu", href: "/menu" },
   { name: "Promo", href: "/promo" },
-  { name: "Riwayat", href: "/history" },
+  // { name: "Riwayat", href: "/history" },
   { name: "Hubungi Kami", href: "/contact" },
 ];
 
