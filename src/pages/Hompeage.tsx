@@ -146,7 +146,7 @@ export default function Homepage() {
       <div className=" bg-[#F4F2EF]">
         <div className="grid-cols-2 grid gap-8 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
           <div className="lg:col-span-1 col-span-full flex flex-col justify-center items-center lg:items-start mt-16 lg:mt-0">
-            <p className="text-sarkara-sign-1 font-bold text-7xl font-fraunces lg:text-left text-center">
+            <p className="text-sarkara-sign-1 font-bold text-7xl font-fraunces lg:text-left text-center capitalize">
               Great simple
               <br /> coffee
             </p>
