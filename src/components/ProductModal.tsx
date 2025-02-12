@@ -216,14 +216,14 @@ export default function ProductModal({
                 <img
                   alt={`diskon`}
                   src={`images/products/${product.menuType}/${product.imageSrc}`}
-                  className="aspect-[2/3] w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5"
+                  className="md:aspect-[2/3] aspect-square w-full rounded-lg bg-gray-100 object-cover sm:col-span-4 lg:col-span-5"
                 />
                 <div className="sm:col-span-8 lg:col-span-7 flex flex-col justify-between h-full">
                   <div className="">
                     <h2 className="text-3xl leading-10 font-bold text-gray-900 sm:pr-12">
                       {product.name}
                     </h2>
-                    <p className="text-sm font-medium text-gray-900 text-justify mt-4">
+                    <p className="text-lg font-medium text-gray-900 text-justify mt-4">
                       {product.productDetail}
                     </p>
                     <section className="border-b-4 border-stone-100 pb-5">
