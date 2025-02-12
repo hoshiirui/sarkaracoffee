@@ -165,12 +165,9 @@ export default function PromoPage() {
                       <time dateTime={post.date} className="text-gray-500">
                         {formatDate(post.date)}
                       </time>
-                      <a
-                        href="#"
-                        className="relative rounded-full bg-sarkara-sign-4 px-3 py-1.5 font-medium text-sarkara-sign-1 hover:bg-sarkara-sign-3"
-                      >
+                      <div className="relative rounded-full bg-sarkara-sign-4 px-3 py-1.5 font-medium text-sarkara-sign-1 hover:bg-sarkara-sign-3">
                         {post.category}
-                      </a>
+                      </div>
                     </div>
                     <div className="group relative">
                       <h3 className="mt-3 text-xl/6 font-semibold text-gray-900 group-hover:text-gray-600">
