@@ -17,6 +17,7 @@ import { formatToIDR } from "@/helper/idrFormatter";
 import { createClient } from "@/helper/supabase/client";
 import { ArrowPathIcon } from "@heroicons/react/24/solid";
 import { PromoWithMenu } from "@/types/Promo";
+import { TrashIcon } from "lucide-react";
 
 interface order {
   idproduk: number;
@@ -284,7 +285,7 @@ export default function OrderList({
                           type="button"
                           onClick={() => setIsResetOrder(true)}
                         >
-                          <ArrowPathIcon width={12} height={12} />
+                          <TrashIcon width={12} height={12} />
                         </button>
                       </div>
                       <div className="ml-3 flex h-7 items-center">

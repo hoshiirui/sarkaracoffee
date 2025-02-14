@@ -243,7 +243,15 @@ export default function ProductModal({
                       <div className="w-1/3">
                         <div className="flex flex-row h-10 rounded-lg bg-transparent mt-1">
                           <button
-                            onClick={() => setAmount(amount - 1)}
+                            onClick={() => {
+                              if (amount > 1) {
+                                setAmount(amount - 1);
+                              } else {
+                                ToastError(
+                                  "Tidak dapat memesan menu kurang dari 1!"
+                                );
+                              }
+                            }}
                             className=" bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
                           >
                             <span className="m-auto text-2xl font-thin">−</span>
@@ -253,11 +261,30 @@ export default function ProductModal({
                             className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border border-gray-300 text-center w-full font-semibold text-md hover:text-black focus:text-black  md:text-basecursor-default flex items-center text-gray-700  outline-none"
                             value={amount}
                             onChange={(event) => {
-                              setAmount(parseInt(event.target.value));
+                              if (event.target.value === "") {
+                                setAmount(parseInt(event.target.value));
+                              } else {
+                                const num = parseInt(event.target.value);
+                                if (num >= 0 && num <= 100) {
+                                  setAmount(num);
+                                }
+                              }
                             }}
                           ></input>
                           <button
-                            onClick={() => setAmount(amount + 1)}
+                            onClick={() => {
+                              if (amount === null || Number.isNaN(amount)) {
+                                setAmount(1);
+                              } else {
+                                if (amount < 100) {
+                                  setAmount(amount + 1);
+                                } else {
+                                  ToastError(
+                                    "Jumlah menu maksimal tercapai! Untuk memesan lebih silahkan konfirmasi pada kasir"
+                                  );
+                                }
+                              }
+                            }}
                             className="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
                           >
                             <span className="m-auto text-2xl font-thin">+</span>
@@ -368,10 +395,14 @@ export default function ProductModal({
                   >
                     {/* Cara penggunaan */}
                     <button
-                      className="bg-sarkara-sign-1 hover:bg-sarkara-sign w-full py-3 rounded-full text-white font-bold"
+                      className="bg-sarkara-sign-1 disabled:bg-gray-400 hover:bg-sarkara-sign w-full py-3 rounded-full text-white font-bold"
                       onClick={handleAddProduct}
+                      disabled={
+                        amount === null || Number.isNaN(amount) || amount === 0
+                      }
                     >
-                      Harga Total ・ {formatToIDR(product.price + priceAdd)}
+                      Harga Total ・{" "}
+                      {formatToIDR((product.price + priceAdd) * amount)}
                     </button>
                     {/* Sizes */}
                   </section>
