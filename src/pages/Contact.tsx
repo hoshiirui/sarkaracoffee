@@ -32,10 +32,7 @@ export default function Contact() {
               Jika Anda mempunyai pertanyaan atau kekhawatiran, Anda dapat
               menghubungi kami di kontak yang tertera berikut:
             </p>
-            <Link
-              href={`https://www.instagram.com/sarkaracoffee.bali/`}
-              className=" mt-6"
-            >
+            <Link href={`https://wa.me/81916085505`} className=" mt-6">
               <div className="flex flex-col gap-1 cursor-pointer">
                 <div className="flex flex-row gap-2">
                   <PhoneIcon className="w-5 text-sarkara-sign-1" />
@@ -51,13 +48,10 @@ export default function Contact() {
                     ></Image>
                   </div>
                 </div>
-                <p className="text-sm text-stone-400">239847829357293</p>
+                <p className="text-sm text-stone-400">+62 819-1608-5505</p>
               </div>
             </Link>
-            <Link
-              href={`https://www.instagram.com/sarkaracoffee.bali/`}
-              className=" mt-2"
-            >
+            <Link href={`mailto:travapp.official@gmail.com`} className=" mt-2">
               <div className="flex flex-col gap-1 cursor-pointer">
                 <div className="flex flex-row gap-2">
                   <EnvelopeIcon className="w-5 text-sarkara-sign-1" />

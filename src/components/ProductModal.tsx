@@ -324,7 +324,7 @@ export default function ProductModal({
                             >
                               Dingin
                             </p>
-                            <p className="text-xs">Cold</p>
+                            <p className="text-xs text-slate-600">Cold</p>
                           </div>
                           <div
                             onClick={() => setPilihanSelected("panas")}
@@ -350,7 +350,7 @@ export default function ProductModal({
                             >
                               Panas
                             </p>
-                            <p className="text-xs">Hot</p>
+                            <p className="text-xs text-slate-600">Hot</p>
                           </div>
                         </div>
                       </section>
