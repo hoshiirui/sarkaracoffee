@@ -64,7 +64,7 @@ const features = [
   {
     name: "Menu Signature",
     description:
-      "Kami memiliki menu khusus yang hanya tersedia di Sarkara yang siap meninggalkan cita rasa tak terlupakan bagi lidah anda!",
+      "Kami memiliki menu khusus yang hanya tersedia di XYZ yang siap meninggalkan cita rasa tak terlupakan bagi lidah anda!",
     icon: SparklesIcon,
   },
   {
@@ -183,7 +183,7 @@ export default function Homepage() {
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
           <div className="lg:pt-4 flex flex-col justify-center lg:max-w-lg">
             <h2 className="text-base/7 font-semibold text-sarkara-sign-1">
-              Tentang Sarkara
+              Tentang XYZ
             </h2>
             <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
               Ini Cerita Kami
@@ -193,10 +193,10 @@ export default function Homepage() {
               depan yang kita impikan&quot;
             </p>
             <p className="mt-6 text-lg/8 text-justify text-gray-600">
-              Sarkara Coffee merupakan sebuah startup kopi yang didirikan pada
-              tahun 2023. Kami percaya bahwa setiap cangkir kopi adalah sebuah
-              karya seni. Dengan menggabungkan biji kopi berkualitas dengan
-              teknik roasting yang unik, kami menciptakan cita rasa yang tak
+              XYZ Coffee merupakan sebuah startup kopi yang didirikan pada tahun
+              2023. Kami percaya bahwa setiap cangkir kopi adalah sebuah karya
+              seni. Dengan menggabungkan biji kopi berkualitas dengan teknik
+              roasting yang unik, kami menciptakan cita rasa yang tak
               terlupakan. Setiap menu kami memiliki cerita dan karakternya
               masing-masing, siap untuk memanjakan lidah Anda.
             </p>
@@ -216,7 +216,7 @@ export default function Homepage() {
       <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-24 flex flex-col items-center">
         <div className="mx-auto max-w-2xl lg:mx-0 flex flex-col items-center">
           <h2 className="text-base/7 font-semibold text-sarkara-sign-1">
-            Sarkara Benefit
+            XYZ Benefit
           </h2>
           <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl mt-2">
             Promo Berlangsung
@@ -282,7 +282,7 @@ export default function Homepage() {
       {/* bagian fitur */}
       <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8 mt-24">
         <h2 className="text-center text-base/7 font-semibold text-sarkara-sign-1">
-          Fasilitas Sarkara
+          Fasilitas XYZ
         </h2>
         <p className="mx-auto mt-2 max-w-lg text-balance text-center text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">
           Tempat Nyaman Untuk Kumpul dan Bekerja
@@ -346,7 +346,7 @@ export default function Homepage() {
               Kepoin yuk aktivitas kami di
             </p>
             <h2 className="mt-2 text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              @sarkaracoffee.bali
+              @XYZcoffee.bali
             </h2>
 
             <div className="mt-10 flex items-center justify-center gap-x-6">

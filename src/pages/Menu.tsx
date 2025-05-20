@@ -48,7 +48,7 @@ const sortOptions = [
 // ];
 
 const kategori = [
-  { value: "signature", label: "Sarkara Signature" },
+  { value: "signature", label: "XYZ Signature" },
   { value: "espresso", label: "Base Espresso" },
   { value: "coffee", label: "Coffee" },
   { value: "non-coffee", label: "Non Coffee" },
@@ -372,7 +372,7 @@ export default function SarkaraMenu() {
         <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-screen">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              Sarkara Menu
+              XYZ Menu
             </h1>
 
             <div className="flex items-center">

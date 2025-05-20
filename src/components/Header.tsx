@@ -23,7 +23,8 @@ const Header = ({ active }: { active: string }) => {
         <div className="flex lg:flex-1">
           <Link href={"/"} className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            <img alt="" src="sarkaralogo.svg" className="h-8 w-auto" />
+            {/* <img alt="" src="sarkaralogo.svg" className="h-8 w-auto" /> */}
+            <p className="font-bold text-lg">Kopi XYZ</p>
           </Link>
         </div>
         <div className="flex lg:hidden">

@@ -13,66 +13,6 @@ import { MenuSarkara } from "@/types/MenuSarkara";
 import { ToastError } from "@/helper/Toast";
 import { formatDate } from "@/helper/dateTimeFormatter";
 
-const posts = [
-  {
-    id: 1,
-    title: "Promo Weekend - Free Mineral Water",
-    href: "#",
-    description:
-      "Dapatkan free mineral water Aqua setiap weekend dengan minimal belanja Rp. 70.000. Yuk pesan sekarang!",
-    date: "Selama Bulan Januari",
-    datetime: "2020-03-16",
-    category: { title: "Free Items", href: "#" },
-    minTrans: 70000,
-  },
-  {
-    id: 2,
-    title: "Diskon 35% Menu Kategori Non-Coffee",
-    href: "#",
-    description:
-      "Dapatkan diskon sebesar 35% untuk menu-menu dengan kategori non-coffee. Untuk keterangan menu dapat dilihat di bagian Menu Berlaku. Yuk pesan sekarang!",
-    menuB: "Matcha, Tea Series",
-    date: "Weekend",
-    datetime: "2020-03-16",
-    category: { title: "Discount", href: "#" },
-  },
-  {
-    id: 3,
-    title: "Dapatkan Extra Porsi Pisang Goreng",
-    href: "#",
-    description:
-      "Dapatkan extra porsi pisang goreng untuk pembelian all variant pisang goreng sesuai tanggal yang berlaku. Yuk pesan sekarang!",
-    date: "14 Januari - 14 Februari 2025",
-    menuB: "Pisang Goreng all Variant",
-    datetime: "2020-03-16",
-    category: { title: "Extras", href: "#" },
-  },
-  {
-    id: 4,
-    title: "Sarkara #3 Anniversary Special Promo",
-    href: "#",
-    description:
-      "Dapatkan potongan harga sebesar 50% untuk item-item yang berlaku. Tunggu apa lagi, yuk pesan sekarang!",
-    date: "14 Maret",
-    menuB: "All Sarkara Signature",
-    datetime: "2020-03-16",
-    category: { title: "Discount", href: "#" },
-  },
-  {
-    id: 5,
-    title: "Makin Kenyang dengan Extra Kentang",
-    href: "#",
-    description:
-      "Dapatkan gratis satu porsi kentang goreng untuk transaksi minimal Rp. 50.000. Yuk pesan sekarang!",
-    date: "14 Januari - 14 Februari 2025",
-    minTrans: 50000,
-    datetime: "2020-03-16",
-    category: { title: "Free Items", href: "#" },
-  },
-
-  // More posts...
-];
-
 export default function PromoPage() {
   const [selectedPromo, setSelectedPromo] = useState<PromoWithMenu>();
   const [promoModalVisible, setPromoModalVisible] = useState(false);
@@ -138,7 +78,7 @@ export default function PromoPage() {
           <div className="flex flex-col items-center">
             <div className="mx-auto max-w-2xl lg:mx-0 flex flex-col items-center">
               <h2 className="text-base/7 font-semibold text-sarkara-sign-1">
-                Sarkara Benefit
+                XYZ Benefit
               </h2>
               <h2 className="text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl mt-2">
                 Promo Berlangsung

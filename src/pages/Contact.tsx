@@ -68,7 +68,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <p className="text-sm text-stone-400">
-                  halo@sarkaracoffee.vercel.app
+                  halo@XYZcoffee.vercel.app
                 </p>
               </div>
             </Link>
@@ -92,7 +92,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <p className="text-sm text-stone-400">@sarkaracoffee.bali</p>
+                <p className="text-sm text-stone-400">@XYZcoffee.bali</p>
               </div>
             </Link>
             {/* <button className="bg-white rounded-lg py-2 text-sarkara-sign-1 font-bold flex flex-row items-center gap-2 justify-center">
