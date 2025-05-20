@@ -9,7 +9,7 @@ const Footer = () => {
         <p className="mb-4 text-sm text-center text-gray-500 dark:text-gray-400 sm:mb-0">
           &copy; 2024 - 2025{" "}
           <span className="font-bold text-sarkara-sign-1">
-            XYZ Coffee Bali & Tokisaki{" "}
+            XYZ Coffee Bali & Rangga Permana{" "}
           </span>
           . All rights reserved.
         </p>
